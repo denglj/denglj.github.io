@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入浅出Python装饰器 | 阿驹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="有朋友说看到《Python CookBook》的装饰器部分有些迷糊，究其原因是没有清晰地理解Python装饰器是什么，能干什么。于是有了本文。看此文时，从头到尾跟着思路走，应该会对Python装饰器有更明白深刻的认识。新手不要跳读，新手不要跳读，新手不要跳读。本文假定你已经明白了Python中什么叫做函数，变量的作用域、解析规则及生存周期。阿驹还是简单阐述一下：
+
+作用域: 变量起作用的范围， 也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出Python装饰器">
+<meta property="og:url" content="http://ajucs.com/2016/01/14/dive-into-python-decorator.html">
+<meta property="og:site_name" content="阿驹">
+<meta property="og:description" content="有朋友说看到《Python CookBook》的装饰器部分有些迷糊，究其原因是没有清晰地理解Python装饰器是什么，能干什么。于是有了本文。看此文时，从头到尾跟着思路走，应该会对Python装饰器有更明白深刻的认识。新手不要跳读，新手不要跳读，新手不要跳读。本文假定你已经明白了Python中什么叫做函数，变量的作用域、解析规则及生存周期。阿驹还是简单阐述一下：
+
+作用域: 变量起作用的范围， 也">
+<meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出Python装饰器">
+<meta name="twitter:description" content="有朋友说看到《Python CookBook》的装饰器部分有些迷糊，究其原因是没有清晰地理解Python装饰器是什么，能干什么。于是有了本文。看此文时，从头到尾跟着思路走，应该会对Python装饰器有更明白深刻的认识。新手不要跳读，新手不要跳读，新手不要跳读。本文假定你已经明白了Python中什么叫做函数，变量的作用域、解析规则及生存周期。阿驹还是简单阐述一下：
+
+作用域: 变量起作用的范围， 也">
+  
+    <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70781226-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">阿驹</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/denglj/denglj.github.io" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/21/getting-started-with-python-books.html">Python入门、基础书籍简评与推荐</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html">简单明了地选择Python GUI库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kivy/">Kivy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/">PIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pillow/">Pillow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQT/">PyQT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wxPython/">wxPython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符编码/">字符编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信开发/">微信开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Kivy/" style="font-size: 10px;">Kivy</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Pillow/" style="font-size: 10px;">Pillow</a> <a href="/tags/PyQT/" style="font-size: 10px;">PyQT</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wxPython/" style="font-size: 10px;">wxPython</a> <a href="/tags/字符编码/" style="font-size: 10px;">字符编码</a> <a href="/tags/微信开发/" style="font-size: 10px;">微信开发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-dive-into-python-decorator" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/14/dive-into-python-decorator.html" class="article-date">
+  <time datetime="2016-01-14T05:52:34.000Z" itemprop="datePublished">2016-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入浅出Python装饰器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有朋友说看到《Python CookBook》的装饰器部分有些迷糊，究其原因是没有清晰地理解Python装饰器是什么，能干什么。于是有了本文。看此文时，从头到尾跟着思路走，应该会对Python装饰器有更明白深刻的认识。新手不要跳读，新手不要跳读，新手不要跳读。<br>本文假定你已经明白了Python中什么叫做函数，变量的作用域、解析规则及生存周期。阿驹还是简单阐述一下：</p>
+<ul>
+<li><strong>作用域</strong>: 变量起作用的范围， 也称之为命名空间。以方法、类、函数、模块、包、Python内置环境(当前Python解释器的Python Path里所包含的)这几个的程序结构为单元，以<code>大结构</code>包含<code>小结构</code>，<code>外层</code>包含<code>内层</code>的方式，把变量放置在这样一个个的空间中，一个程序结构单元就对应一个作用域（命名空间）。每个变量，不加global和nonlocal关键字时，只属于声明该变量的这层作用域。<a id="more"></a></li>
+<li><strong>变量解析规则</strong>: 根据上述可知，作用域是可以相互独立，也可以是相互嵌套存在的。而变量的解析，是从自身所在的作用域出发，逐层往上寻找。并不能去查找和自己独立并列的作用域。</li>
+<li><strong>变量生存周期</strong>：变量随着它所在的程序结构单元（方法、类、函数、模块、包）的调用而生，随着调用结束而消。调用开始前和结束后试图操作该作用域内的变量，都将出错。</li>
+</ul>
+<p><strong>一定要深刻理解以上三点。一定要深刻理解以上三点。一定要深刻理解以上三点。</strong><br>在正式讲解装饰器之前解释上面三个概念的原因是装饰器就是根据这三个概念玩的花样。也是《Python之禅》中最后一句话“Namespaces are one honking great idea – let’s do more of those!”的一个具体体现。</p>
+<h2 id="Python函数的特点">Python函数的特点</h2><ul>
+<li>是对象，与其他对象无异，具有属性，可以作为参数传递、返回等</li>
+<li>函数里可以再声明函数（嵌套）</li>
+</ul>
+<h2 id="函数闭包">函数闭包</h2><p>一个来自于Scheme的概念，被诸多函数式编程语言实现。也许你听说过装饰器是基于闭包实现的，那么闭包的本质是什么呢？我们先不对闭包下定义。（翠花儿，上代码！）<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    x, y, z = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">       a, b = <span class="number">4</span>, <span class="number">5</span></span><br><span class="line">       print(<span class="string">"inner's vars sum:"</span>, a+b)</span><br><span class="line">       print(<span class="string">"use var y of outer:"</span>, y)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line">f = outer()</span><br><span class="line">f()</span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line">(<span class="string">"inner's vars sum:"</span>, <span class="number">9</span>)</span><br><span class="line">(<span class="string">'use var y of outer:'</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>仔细看上述代码。在inner中使用变量y时，根据解析规则，因为inner自己的作用域中未找到，故而到上层的outer的作用域中查找，打印的两行结果也是正确的。<br><strong>但是，但是，但是</strong>，有一个问题，我们说过变量的生存周期。不是说函数调用结束时，变量就销毁了吗？ <code>f = outer()</code> 执行完时按理说x, y, z及内部的inner函数都应当被销毁了呀？！你也许会想，调用结束时把inner返回给了<code>f</code>呀，当然能执行。思考一个问题，<code>f</code> 是 <code>inner</code> 吗？换个问法，这里等号赋值，是把<code>inner</code>的引用传递给了<code>f</code>吗？<br><code>f</code> 不是 <code>inner</code> ，因为inner只包含其def声明开始，函数体结束为止的内容，其作用域中只有a，b两个变量，在我们调用f时，却正确打印出了outer作用域中的变量。<br>似乎，<code>f</code> 是 <code>inner</code> 加上 <code>y</code> 的合体。对了，这就引出了闭包的概念，<code>f</code>是一个闭包。下面来给闭包概念做个确切的表述。</p>
+<blockquote>
+<p>嵌套定义在非全局作用域中的函数，当它的外部函数被调用就会生成一个闭包，闭包中包含了这个子函数本身的代码与其依赖的外部变量的引用。</p>
+</blockquote>
+<p>注：Python的一个py文件就是一个模块，就是一个全局作用域。闭包不是这个子函数， 而是这个子程序与其依赖的外部变量构成的整体。这个整体构成了一个新的封闭的作用域，所以叫闭包。<strong>上例中，inner子程序并没依赖外部的x和z，所以这个闭包中不包含x,z。</strong>也可以把闭包当做一个新的函数来对待，不过这个新函数的逻辑代码还是原来的子函数代码，但其作用域，却包含了原子函数的变量和其依赖的外部变量。</p>
+<p><strong>另外，每次调用外部函数，其内部函数都会被重新定义，就会生成一个新的闭包。</strong> 这是同一个装饰器可以作用于不同的函数的基础。如下例，其本质不是分别传递参数1,2给inner，而是生成了两个能打印各自数字的闭包。<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">print</span> x</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line">print1 = outer(<span class="number">1</span>)</span><br><span class="line">print2 = outer(<span class="number">2</span>)</span><br><span class="line">print1()</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">print2()</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="“纯手工”装饰器">“纯手工”装饰器</h2><p>在上例中，我们给<code>outer</code>函数传递的参数是一个整数，然后对这个整数进行了处理（某种装饰和加强，虽然这里只是print了一下）。如果我们传递的是一个函数呢？那它就成了装饰器！我们可以在inner内部执行额外的操作，再返回一个闭包。而这个返回的闭包，就是原函数被装饰后的版本（代替加强版）。<strong>装饰器的本质就是函数闭包，或者说利用了函数闭包的特性。</strong><br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">(function)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">"执行function之前可以进行额外操作"</span>)</span><br><span class="line">        result = function()</span><br><span class="line">        print(<span class="string">"执行function之后还可以进行额外操作"</span>)</span><br><span class="line">        result *= <span class="number">2</span>        <span class="comment"># 对function的返回值本身进行额外操作</span></span><br><span class="line">        <span class="keyword">return</span> result      <span class="comment"># 返回‘加强’后的结果</span></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_for_deco</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1024</span></span><br><span class="line"></span><br><span class="line">decorated = outer(wait_for_deco)</span><br><span class="line"><span class="keyword">print</span> decorated()</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="number">2048</span></span><br></pre></td></tr></table></figure></p>
+<p>上例就是纯手工实现的一个最简单的装饰器。装饰器函数<code>outer</code>并没有修改被装饰函数<code>wait_for_deco</code>，但我们调用被装饰后的<code>decorated</code>函数闭包却能够得到原函数的加强版结果，还能进行额外的操作。<br>为了让返回的闭包函数看起来就像是原函数的加强版，我们只需要像下面这么做。<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait_for_deco = outer(wait_for_deco)</span><br></pre></td></tr></table></figure></p>
+<p>为了简化代码，Python为我们提供了装饰符<code>@</code>，只需要在<code>wait_for_deco</code>上面加上<code>@outer</code>就可以了。<strong>实际上装饰符<code>@</code>就仅仅是帮我们自动地把返回的闭包函数名字替换为原函数的名字。</strong> 使返回后的新函数(闭包)看起来就是原函数，不过是加强了的。<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># outer 函数不变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用装饰符简化代码</span></span><br><span class="line"><span class="decorator">@outer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_for_deco</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1024</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> wait_for_deco()</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="number">2048</span></span><br></pre></td></tr></table></figure></p>
+<p>以上，装饰器的来龙去脉就讲清楚了。但是它太简单了，被装饰的函数没有参数，装饰器也没有参数。接下来就是对装饰器进行扩展。比如写出能接受任何函数的装饰器，以及装饰器本身可以带参数，以及用类作装饰器，还有装饰器的实际应用。</p>
+<h2 id="支持带参数的函数">支持带参数的函数</h2><p>刚才我们提到，装饰器最终返回的是一个闭包，而这个闭包可以看做一个函数，它是原函数的加强版。即是，调用原函数，变成了调用这个被装饰后的闭包。那么原函数的参数如果能够按原样传递给这个闭包函数的话，那么在装饰器中我们应该在其内部函数的定义中按原函数的格式写上参数。这样调用这个闭包时就可以按原来的样子传递参数了。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 例如为下面的函数写一个装饰器，应该在内部的wapper中按原样传递参数</span><br><span class="line">def decorator(func):</span><br><span class="line">    def wrapper(x, y)</span><br><span class="line">      ret = func(x, y)    # 原函数的返回值</span><br><span class="line">      return ret*2        # 原函数的结果“加强”后再返回</span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def wait_for_deco(x, y):</span><br><span class="line">  return x + y</span><br><span class="line"></span><br><span class="line">print(wait_for_deco(1, 2))</span><br><span class="line"></span><br><span class="line"># 输出</span><br><span class="line">6</span><br></pre></td></tr></table></figure></p>
+<p>按照上面这种写法虽然可以传参了但有个缺陷，参数个数不确定的函数就没法使用这个装饰器了。比如，原函数有x, y, z三个参数，也想有把结果放大两倍的装饰器呢？能写出通用装饰器吗？能。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def decorator(func):</span><br><span class="line">    def wrapper(*args, **kwargs)</span><br><span class="line">      ret = func(*args, **kwargs)</span><br><span class="line">      return ret*2</span><br><span class="line">    return wrapper</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def wait_for_deco_a(x, y):</span><br><span class="line">  return x + y</span><br><span class="line"></span><br><span class="line">@decorator</span><br><span class="line">def wait_for_deco_b(x, y, z):</span><br><span class="line">  return x + y + z</span><br><span class="line"></span><br><span class="line">print(wait_for_deco_a(1, 2))</span><br><span class="line">6</span><br><span class="line">print(wait_for_deco_b(1, 2, 3))</span><br><span class="line">12</span><br></pre></td></tr></table></figure></p>
+<p>现在我们可以让装饰器装饰任何形式传参的函数了。而以上两个被装饰的原函数也可以根据任意参数的匹配来简化为一个函数，不属于本文探讨的内容了。<code>*args, **kwargs</code> 的具体使用方法和原理，这是Python基础内容，不明白的可以看《Python学习手册》作用域和参数那一章。</p>
+<h2 id="装饰器带参数">装饰器带参数</h2><p>前文中讲解了，装饰符<code>@</code>只是帮我们把返回的闭包名字替换为了和原函数一样的名字。像下面这种操作：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">after_decorated = decorator(origin_func)</span><br><span class="line"><span class="string">'@'</span>符号做就是</span><br><span class="line">origin_func = decorator(origin_func) <span class="comment"># 得到的是已装饰后的闭包函数</span></span><br></pre></td></tr></table></figure></p>
+<p>我们只需要记住一点，最终装饰器需要返回一个<strong>可调用的</strong>对象（闭包函数），我们才能把原函数作为第一个参数传进去。而要装饰器支持参数，类似于下面这样：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="decorator">@decorator(args)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_for_deco</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br></pre></td></tr></table></figure></p>
+<p>按照我们上面讲的<code>@</code>的作用，解释器会把上面这个带参数的装饰器像下面这样执行：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait_for_deco = decorator(args)(x, y)</span><br></pre></td></tr></table></figure></p>
+<p>聪明的你已经想到了，<code>decrator(args)</code>返回的是最终需要的装饰器就好了。所以，带参数的装饰器就需要写成下面这样：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(<span class="string">"在这里使用装饰器的name参数："</span>, name)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(func)</span>:</span></span><br><span class="line">        print(<span class="string">"在这里也可用装饰器的name参数："</span>, name)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">            print(<span class="string">"这里还可使用装饰器的name参数："</span>, name)</span><br><span class="line">            ret = func(*args, **kwargs)    <span class="comment"># 这里进行原函数的计算</span></span><br><span class="line">            <span class="keyword">return</span> ret*<span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> _wrapper                    <span class="comment"># 返回可调用对象，_wrapper可以接受原函数的参数</span></span><br><span class="line">    <span class="keyword">return</span> wrapper                         <span class="comment"># 返回真正的装饰器，接受原函数作为第一个参数</span></span><br><span class="line"></span><br><span class="line"><span class="decorator">@decorator('haha')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_for_deco</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br></pre></td></tr></table></figure></p>
+<h2 id="用类(class)作装饰器">用类(class)作装饰器</h2><h2 id="同时使用多个装饰器">同时使用多个装饰器</h2><h2 id="装饰器实例">装饰器实例</h2>
+        <div class="article-rights-info">
+          <li>
+            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
+          </li>
+          <li><strong>发表时间：</strong>2016-01-14 13:52:34</li>
+          <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
+          <li><strong>永久链接：</strong>http://ajucs.com/2016/01/14/dive-into-python-decorator.html</li>
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2016/01/14/dive-into-python-decorator.html" data-id="cin8jjikh0011a2hi53z3kzo1" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/22/python-memoization.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Python性能优化之记忆化（Memoization）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/21/getting-started-with-python-books.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python入门、基础书籍简评与推荐</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">阿驹</a>
+      &copy; 2016 阿驹<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'aju';
+  
+  var disqus_url = 'http://ajucs.com/2016/01/14/dive-into-python-decorator.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.scrollLoading.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

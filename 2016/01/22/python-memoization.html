@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python性能优化之记忆化（Memoization） | 阿驹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记忆化（Memoization）介绍简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。有一个限制条件是该函数必须是纯函数式的，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，square(3) 的结果永远是9，所以我们才能把它的结果存储起来，下次需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python性能优化之记忆化（Memoization）">
+<meta property="og:url" content="http://ajucs.com/2016/01/22/python-memoization.html">
+<meta property="og:site_name" content="阿驹">
+<meta property="og:description" content="记忆化（Memoization）介绍简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。有一个限制条件是该函数必须是纯函数式的，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，square(3) 的结果永远是9，所以我们才能把它的结果存储起来，下次需">
+<meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python性能优化之记忆化（Memoization）">
+<meta name="twitter:description" content="记忆化（Memoization）介绍简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。有一个限制条件是该函数必须是纯函数式的，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，square(3) 的结果永远是9，所以我们才能把它的结果存储起来，下次需">
+  
+    <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70781226-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">阿驹</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/denglj/denglj.github.io" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/21/getting-started-with-python-books.html">Python入门、基础书籍简评与推荐</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html">简单明了地选择Python GUI库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kivy/">Kivy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/">PIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pillow/">Pillow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQT/">PyQT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wxPython/">wxPython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符编码/">字符编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信开发/">微信开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Kivy/" style="font-size: 10px;">Kivy</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Pillow/" style="font-size: 10px;">Pillow</a> <a href="/tags/PyQT/" style="font-size: 10px;">PyQT</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wxPython/" style="font-size: 10px;">wxPython</a> <a href="/tags/字符编码/" style="font-size: 10px;">字符编码</a> <a href="/tags/微信开发/" style="font-size: 10px;">微信开发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-python-memoization" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/22/python-memoization.html" class="article-date">
+  <time datetime="2016-01-22T06:43:16.000Z" itemprop="datePublished">2016-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python性能优化之记忆化（Memoization）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="记忆化（Memoization）介绍">记忆化（Memoization）介绍</h2><p>简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。<br><strong>有一个限制条件是该函数必须是纯函数式的</strong>，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，<code>square(3)</code> 的结果永远是<code>9</code>，所以我们才能把它的结果存储起来，下次需要知道<code>3</code>的平方的结果时，无需计算，直接从内存中读取就好了。<br><a id="more"></a><br>而那些依赖于可变的参数的函数，则不可使用这种方式进行加速。比如获取系统当前登录用户数量的函数，也许参数都是固定的，但返回值却是可变的，这是由系统中即时登录的用户数量决定的，缓存起来就没意义了。</p>
+<p>这里的缓存介质，可以是内存，可以是硬盘上的文件，可以是数据库，总之，能使之加速则认为是有效的。我们经常提及的 <code>memcached</code> 分布式内存对象缓存系统也是一种基于记忆化（memoization）的优化方式。今天不讲 <code>memcached</code> ，而是一种更简便小巧的办法，然而，它们的基本原理是一样的，它们都实现了LRU（Least Recently Used）缓存算法， 只缓存最少的最近使用过的数据。</p>
+<h2 id="Python内置函数缓存装饰器">Python内置函数缓存装饰器</h2><p><strong><code>@functools.lru_cache(maxsize=128, typed=False)</code></strong>，<code>maxsize</code> 参数是指最大缓存多少个调用，如果赋值为 <code>None</code> 则是无限制缓存，且关闭 LRU 功能。<code>typed</code> 参数控制函数参数类型不同时是否单独缓存。设置为<code>True</code>时， 例如<code>f(3)</code>和<code>f(3.0)</code>将会区别对待。</p>
+<p>下面这个例子是缓存静态web内容的：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"></span><br><span class="line"><span class="decorator">@lru_cache(maxsize=32)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pep</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="string">'Retrieve text of a Python Enhancement Proposal'</span></span><br><span class="line">    resource = <span class="string">'http://www.python.org/dev/peps/pep-%04d/'</span> % num</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> urllib.request.urlopen(resource) <span class="keyword">as</span> s:</span><br><span class="line">            <span class="keyword">return</span> s.read()</span><br><span class="line">    <span class="keyword">except</span> urllib.error.HTTPError:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Not Found'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> n <span class="keyword">in</span> <span class="number">8</span>, <span class="number">290</span>, <span class="number">308</span>, <span class="number">320</span>, <span class="number">8</span>, <span class="number">218</span>, <span class="number">320</span>, <span class="number">279</span>, <span class="number">289</span>, <span class="number">320</span>, <span class="number">9991</span>:</span><br><span class="line"><span class="prompt">... </span>    pep = get_pep(n)</span><br><span class="line"><span class="prompt">... </span>    print(n, len(pep))</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>get_pep.cache_info()</span><br><span class="line">CacheInfo(hits=<span class="number">3</span>, misses=<span class="number">8</span>, maxsize=<span class="number">32</span>, currsize=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p><code>lru_cache</code>装饰器是Python3.2新增的，Python3.3新增了<code>typed</code>可选参数。</p>
+<h2 id="Python2的实现">Python2的实现</h2><p>Python2中没有<code>lru_cache</code>装饰器，但是我们可以自己实现，非常简单，如下：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">_CACHE_VALUES = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">memoized</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> _CACHE_VALUES.get(x, func(x))</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="decorator">@memoized</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addtwo</span><span class="params">(x)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> x+<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>但我们上面这种写法太简单了，连缓存命中率这些统计都没有，而且也不通用。但明白了基本原理，我们要扩展也就不难了。更加复杂的装饰器实现可以参考<a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html">《深入浅出Python装饰器》</a>。<br>更偷懒一点，你可以把Python源码中的lru_cahce函数相关代码拷贝到项目中，<a href="https://github.com/python/cpython/blob/77a475ebaa65aa5a85287cbe782c552039c9f507/Lib/functools.py#L391" target="_blank" rel="external">参考这里</a>。</p>
+
+        <div class="article-rights-info">
+          <li>
+            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
+          </li>
+          <li><strong>发表时间：</strong>2016-01-22 14:43:16</li>
+          <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
+          <li><strong>永久链接：</strong>http://ajucs.com/2016/01/22/python-memoization.html</li>
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2016/01/22/python-memoization.html" data-id="cin8jjije0009a2hiucpipp3n" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2016/01/22/python-memoization.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/20/use-multi-ssh-key-for-git.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          管理多个SSH Key以支持多个Git账号
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/14/dive-into-python-decorator.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">深入浅出Python装饰器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">阿驹</a>
+      &copy; 2016 阿驹<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'aju';
+  
+  var disqus_url = 'http://ajucs.com/2016/01/22/python-memoization.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.scrollLoading.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

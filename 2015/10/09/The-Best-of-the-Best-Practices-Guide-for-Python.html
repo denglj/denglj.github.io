@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python编码最佳之最佳实践 | 阿驹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="总体的价值观
+把你为自己构建的工具贡献给别人
+简单性通常比功能性更好
+解决90%的情况，忽略唱反调的
+优雅胜于丑陋
+构建开源代码（哪怕是为了闭源项目）
+
+通用开发准则
+显式优于隐式
+重视可读性
+任何人都可以解决任何问题
+一旦破窗（糟糕的设计、错误的决定、丑陋的代码）被发现就尽快修复它们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python编码最佳之最佳实践">
+<meta property="og:url" content="http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html">
+<meta property="og:site_name" content="阿驹">
+<meta property="og:description" content="总体的价值观
+把你为自己构建的工具贡献给别人
+简单性通常比功能性更好
+解决90%的情况，忽略唱反调的
+优雅胜于丑陋
+构建开源代码（哪怕是为了闭源项目）
+
+通用开发准则
+显式优于隐式
+重视可读性
+任何人都可以解决任何问题
+一旦破窗（糟糕的设计、错误的决定、丑陋的代码）被发现就尽快修复它们">
+<meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python编码最佳之最佳实践">
+<meta name="twitter:description" content="总体的价值观
+把你为自己构建的工具贡献给别人
+简单性通常比功能性更好
+解决90%的情况，忽略唱反调的
+优雅胜于丑陋
+构建开源代码（哪怕是为了闭源项目）
+
+通用开发准则
+显式优于隐式
+重视可读性
+任何人都可以解决任何问题
+一旦破窗（糟糕的设计、错误的决定、丑陋的代码）被发现就尽快修复它们">
+  
+    <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70781226-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">阿驹</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/denglj/denglj.github.io" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/21/getting-started-with-python-books.html">Python入门、基础书籍简评与推荐</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html">简单明了地选择Python GUI库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kivy/">Kivy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/">PIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pillow/">Pillow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQT/">PyQT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wxPython/">wxPython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符编码/">字符编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信开发/">微信开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Kivy/" style="font-size: 10px;">Kivy</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Pillow/" style="font-size: 10px;">Pillow</a> <a href="/tags/PyQT/" style="font-size: 10px;">PyQT</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wxPython/" style="font-size: 10px;">wxPython</a> <a href="/tags/字符编码/" style="font-size: 10px;">字符编码</a> <a href="/tags/微信开发/" style="font-size: 10px;">微信开发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-The-Best-of-the-Best-Practices-Guide-for-Python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html" class="article-date">
+  <time datetime="2015-10-09T03:30:00.000Z" itemprop="datePublished">2015-10-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python编码最佳之最佳实践
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="总体的">总体的</h2><h3 id="价值观">价值观</h3><ul>
+<li>把你为自己构建的工具贡献给别人</li>
+<li>简单性通常比功能性更好</li>
+<li>解决90%的情况，忽略唱反调的</li>
+<li>优雅胜于丑陋</li>
+<li>构建开源代码（哪怕是为了闭源项目）</li>
+</ul>
+<h3 id="通用开发准则">通用开发准则</h3><ul>
+<li>显式优于隐式</li>
+<li>重视可读性</li>
+<li>任何人都可以解决任何问题</li>
+<li>一旦破窗（糟糕的设计、错误的决定、丑陋的代码）被发现就尽快修复它们  <a id="more"></a>
+<blockquote>
+<p>注：<a href="https://zh.wikipedia.org/zh-cn/%E7%A0%B4%E7%AA%97%E6%95%88%E5%BA%94" target="_blank" rel="external">破窗效应</a></p>
+</blockquote>
+</li>
+<li>立即做比永不做好</li>
+<li>严格测试，为每个新功能/特性写好文档</li>
+<li>更重要的是测试驱动开发–人为驱动开发</li>
+<li>这些准则很可能会变化</li>
+</ul>
+<h2 id="特别的">特别的</h2><h3 id="风格">风格</h3><p>遵循<a href="http://www.python.org/dev/peps/pep-0008/" target="_blank" rel="external">PEP8</a>是明智的。</p>
+<h4 id="命名">命名</h4><ul>
+<li>变量名、函数名、方法名、包名、模块名<ul>
+<li><code>lower_case_with_underscores</code> （带下划线小写字母）</li>
+</ul>
+</li>
+<li>类名、异常名<ul>
+<li><code>CapWords</code> （单词首字母大写）</li>
+</ul>
+</li>
+<li>保护的方法名和内部函数名<ul>
+<li><code>_single_leading_underscore(self, ...)</code> （单下划线开始）</li>
+</ul>
+</li>
+<li>私有方法名<ul>
+<li><code>__double_leading_underscore(self, ...)</code> （双下划线开始）</li>
+</ul>
+</li>
+<li>常量名<ul>
+<li><code>ALL_CAPS_WITH_UNDERSCORES</code> （全大写带下划线）</li>
+</ul>
+</li>
+</ul>
+<h5 id="通用命名准则">通用命名准则</h5><p>尽量避免一个字符的变量名，尤其是l,I,o,O,0等不易区分的。<br>例外：在非常短的代码块中，能从直接的上下文中清晰明了的知道变量含义。</p>
+<p><strong>适用情况</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> elements:</span><br><span class="line">    e.mutate()</span><br></pre></td></tr></table></figure></p>
+<p>避免多余的标签：<br><strong>可以的</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> audio</span><br><span class="line"></span><br><span class="line">core = audio.Core()</span><br><span class="line">controller = audio.Controller()</span><br></pre></td></tr></table></figure></p>
+<p><strong>不可以</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> audio</span><br><span class="line"></span><br><span class="line">core = audio.AudioCore()</span><br><span class="line">controller = audio.AudioController()</span><br></pre></td></tr></table></figure></p>
+<p>使用“反向符号”：<br><strong>可以的</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">elements = ...</span><br><span class="line">elements_active = ...</span><br><span class="line">elements_defunct = ...</span><br></pre></td></tr></table></figure></p>
+<p><strong>不可以</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">elements = ...</span><br><span class="line">active_elements = ...</span><br><span class="line">defunct_elements ...</span><br></pre></td></tr></table></figure></p>
+<p>避免使用setter和getter方法：<br><strong>可以的</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.age = <span class="number">42</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>不可以</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.set_age(<span class="number">42</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="缩进">缩进</h4><p>四个空格，永远不要用制表符tab，说的够多了。</p>
+<h4 id="导入">导入</h4><p>导入整个模块而不是单个变量。例如顶级模块<code>canteen</code>中有<code>canteen/sessions.py</code>.</p>
+<p><strong>可以的</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> canteen</span><br><span class="line"><span class="keyword">import</span> canteen.sessions</span><br><span class="line"><span class="keyword">from</span> canteen <span class="keyword">import</span> sessions</span><br></pre></td></tr></table></figure></p>
+<p><strong>不可以</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> canteen <span class="keyword">import</span> get_user  <span class="comment"># Symbol from canteen/__init__.py</span></span><br><span class="line"><span class="keyword">from</span> canteen.sessions <span class="keyword">import</span> get_session  <span class="comment"># Symbol from canteen/sessions.py</span></span><br></pre></td></tr></table></figure></p>
+<p>例外：一些文档中特别注明的应当导入单个变量的第三方代码<br>基本准则：避免循环引用。参考<a href="https://sites.google.com/a/khanacademy.org/forge/for-developers/styleguide/python#TOC-Imports" target="_blank" rel="external">这里</a>。</p>
+<p>所有的导入分三个部分放在代码的最上方，每个部分用一个空行分隔，放置顺序：</p>
+<ol>
+<li>系统/标准库导入（例如 import math）</li>
+<li>第三方库/代码导入（例如 import flask）</li>
+<li>本地/本项目导入 （例如 import my_module）</li>
+</ol>
+<p>基本准则：能清楚地知道每个模块来自哪里</p>
+<h4 id="文档">文档</h4><p>遵循<a href="http://www.python.org/dev/peps/pep-0257/" target="_blank" rel="external">PEP 257</a>文档字串指南。<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html" target="_blank" rel="external">reStructured Text</a> 和 <a href="http://sphinx-doc.org/" target="_blank" rel="external">Sphinx</a> 可以帮助强制执行这些标准。</p>
+<p>单行文档字符串用于简单的函数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""返回 ``foo`` 的路径名称。"""</span></span><br></pre></td></tr></table></figure></p>
+<p>多行文档字符串应该包括：</p>
+<ul>
+<li>概括的说明</li>
+<li>用例</li>
+<li>参数</li>
+<li>返回类型和语义</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Train a model to classify Foos and Bars.</span><br><span class="line"></span><br><span class="line">Usage::</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; import klassify</span><br><span class="line">    &gt;&gt;&gt; data = [("green", "foo"), ("orange", "bar")]</span><br><span class="line">    &gt;&gt;&gt; classifier = klassify.train(data)</span><br><span class="line"></span><br><span class="line">:param train_data: A list of tuples of the form ``(color, label)``.</span><br><span class="line">:rtype: A :class:`Classifier &lt;Classifier&gt;`</span><br><span class="line">"""</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong></p>
+<ul>
+<li>使用动词（Return）比名词（Returns）好一些</li>
+<li>为类的 <code>__init__</code> 方法添加文档字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""A simple representation of a human being.</span><br><span class="line"></span><br><span class="line">    :param name: A string, the person's name.</span><br><span class="line">    :param age: An int, the person's age.</span><br><span class="line">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br></pre></td></tr></table></figure>
+<h5 id="注释">注释</h5><p>有节制地使用注释。提高代码的可读性比写一大堆注释好。通常情况下，短小的方法比注释有效。<br><strong>不可以</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># If the sign is a stop sign</span></span><br><span class="line"><span class="keyword">if</span> sign.color == <span class="string">'red'</span> <span class="keyword">and</span> sign.sides == <span class="number">8</span>:</span><br><span class="line">    stop()</span><br></pre></td></tr></table></figure></p>
+<p><strong>可以</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_stop_sign</span><span class="params">(sign)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> sign.color == <span class="string">'red'</span> <span class="keyword">and</span> sign.sides == <span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> is_stop_sign(sign):</span><br><span class="line">    stop()</span><br></pre></td></tr></table></figure></p>
+<p>当撰写注释时，记得运用“Strunk &amp; White”。</p>
+<blockquote>
+<p>注：参考《The Elements of Style》，中文译名《文体的要素》。<br>《The Elements of Style》是一本美国英语的写作指南。作者是William Strunk, Jr.和E. B. White。书中包括8个“基本使用规则”，10个“创作的基本原则”，“一些形式的问题”，一个包含49个易误用的单词和表达，57个易拼错的单词的列表。在2011年，时代 (杂志)把The Elements of Style列为从1923年到现在100本最富有影响力的书之一。（摘自维基百科）</p>
+</blockquote>
+<h4 id="代码行长度">代码行长度</h4><p>无需再强调了。80-100个字符是合适的。使用小括号来延续代码行。</p>
+<blockquote>
+<p>注：意思是尽量避免使用反斜杠。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wiki = (</span><br><span class="line">    <span class="string">"The Colt Python is a .357 Magnum caliber revolver formerly manufactured "</span></span><br><span class="line">    <span class="string">"by Colt's Manufacturing Company of Hartford, Connecticut. It is sometimes "</span></span><br><span class="line">    <span class="string">'referred to as a "Combat Magnum". It was first introduced in 1955, the '</span></span><br><span class="line">    <span class="string">"same year as Smith &amp; Wesson's M29 .44 Magnum."</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="测试">测试</h3><p>争取100%的测试覆盖率，但不要迷恋覆盖率数字。</p>
+<blockquote>
+<p>注：不要为了得到一个好看的测试覆盖率而测试，抓住测试的本质——为了保证软件系统按设计正确稳定地运行。覆盖率越高，不一定能保证系统正确性和稳定性越高。</p>
+</blockquote>
+<h4 id="通用测试准则">通用测试准则</h4><ul>
+<li>使用长的描述性的名称。测试方法的名称意义明确就可以避免额外文档字符串或注释。</li>
+<li>测试应该是孤立的。避免依赖于真实的数据库和网络。使用单独的测试数据库或使用mock对象。（注：每个测试方法也应当是孤立的，尽量不能相互依赖。）</li>
+<li>倾向于使用<a href="https://github.com/rbarrois/factory_boy" target="_blank" rel="external">factories</a>来搭建测试上下文（fixtures）。<blockquote>
+<p>注：fixtures是指 <a href="https://en.wikipedia.org/wiki/Test_fixture#Software" target="_blank" rel="external">test fixtures</a>，测试所依赖的数据、条件等一些列特定环境，使得测试结果是可以重复检验的。也被称为测试上下文（test context）。</p>
+</blockquote>
+</li>
+<li>永远不要让未完成的测试通过，否则有遗忘它们的风险。取而代之的是添加一个占位符，例如<code>assert False, &quot;TODO: finish me&quot;</code>。</li>
+</ul>
+<h4 id="单元测试">单元测试</h4><ul>
+<li>专注于每一个小功能。</li>
+<li>执行要快，但慢的测试比没有测试好得多。</li>
+<li>通常有必要为每个class或model编写对应的测试类。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">import</span> factories</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonTest</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.person = factories.PersonFactory()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_has_age_in_dog_years</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertEqual(self.person.dog_years, self.person.age / <span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="功能性测试">功能性测试</h4><p>功能性测试是高层次的测试，接近于终端用户与你系统的交互过程，通常用于Web和GUI程序。</p>
+<ul>
+<li>为应用场景编写测试，测试用例和测试方法的名称应该和场景描述一致。</li>
+<li>在编写测试代码之前，先写明注释。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestAUser</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_can_write_a_blog_post</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Goes to the her dashboard</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># Clicks "New Post"</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># Fills out the post form</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># Clicks "Submit"</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># Can see the new post</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p>注意测试用例和测试方法是如何做到连起来读就像“测试一个用户可以发表一篇博客”的。</p>
+<blockquote>
+<p>注：正常的功能代码也应该有这样的流畅性。如果代码写得简洁优雅，读起来像读诗一样，就能体会到<strong>Art of</strong> computer programming了。</p>
+</blockquote>
+<h2 id="灵感来源">灵感来源</h2><ul>
+<li><a href="http://www.python.org/dev/peps/pep-0020/" target="_blank" rel="external">PEP 20 (The Zen of Python)</a></li>
+<li><a href="http://www.python.org/dev/peps/pep-0008/" target="_blank" rel="external">PEP 8 (Style Guide for Python)</a></li>
+<li><a href="http://docs.python-guide.org/en/latest/" target="_blank" rel="external">The Hitchiker’s Guide to Python</a></li>
+<li><a href="https://sites.google.com/a/khanacademy.org/forge/for-developers" target="_blank" rel="external">Khan Academy Development Docs</a></li>
+<li><a href="http://youtu.be/GZNUfkVIHAY" target="_blank" rel="external">Python Best Practice Patterns</a></li>
+<li><a href="http://www.nilunder.com/blog/2013/08/03/pythonic-sensibilities/" target="_blank" rel="external">Pythonic Sensibilities</a></li>
+<li><a href="http://www.amazon.com/The-Pragmatic-Programmer-Journeyman-Master/dp/020161622X/ref=sr_1_1?ie=UTF8&amp;qid=1381886835&amp;sr=8-1&amp;keywords=pragmatic+programmer" target="_blank" rel="external">The Pragmatic Programmer</a></li>
+<li>其他</li>
+</ul>
+<h2 id="译者注">译者注</h2><ul>
+<li><a href="https://osf.io/28rmf/wiki/home/" target="_blank" rel="external">原文链接</a></li>
+<li>在翻译的基础上有少许注解</li>
+<li>本文是的小、全、精的Python编码指南，但读罢觉得此文还有待改进和补充。感兴趣的同学可以关注本文的后续更新。</li>
+</ul>
+
+        <div class="article-rights-info">
+          <li>
+            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
+          </li>
+          <li><strong>发表时间：</strong>2015-10-09 11:30:00</li>
+          <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
+          <li><strong>永久链接：</strong>http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html</li>
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html" data-id="cin8jjikq0018a2hi9u35zo2x" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/29/python-is-compiler-or-interpreter.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Python是编译型还是解释型语言？与Java有何不同？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/28/addons-in-third-part-wechat-platform.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">附加应用接入微信第三方平台解决方案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">阿驹</a>
+      &copy; 2016 阿驹<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'aju';
+  
+  var disqus_url = 'http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.scrollLoading.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

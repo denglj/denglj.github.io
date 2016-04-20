@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>阿驹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="阿驹">
+<meta property="og:url" content="http://ajucs.com/index.html">
+<meta property="og:site_name" content="阿驹">
+<meta property="og:description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿驹">
+<meta name="twitter:description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
+  
+    <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70781226-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">阿驹</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/denglj/denglj.github.io" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/21/getting-started-with-python-books.html">Python入门、基础书籍简评与推荐</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html">简单明了地选择Python GUI库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kivy/">Kivy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/">PIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pillow/">Pillow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQT/">PyQT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wxPython/">wxPython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符编码/">字符编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信开发/">微信开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Kivy/" style="font-size: 10px;">Kivy</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Pillow/" style="font-size: 10px;">Pillow</a> <a href="/tags/PyQT/" style="font-size: 10px;">PyQT</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wxPython/" style="font-size: 10px;">wxPython</a> <a href="/tags/字符编码/" style="font-size: 10px;">字符编码</a> <a href="/tags/微信开发/" style="font-size: 10px;">微信开发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main">
+  
+    <article id="post-use-multi-ssh-key-for-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/20/use-multi-ssh-key-for-git.html" class="article-date">
+  <time datetime="2016-04-20T01:30:02.000Z" itemprop="datePublished">2016-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SSH Key 可以方便地解决系统登录的问题，不用每次提交代码时输入相关Git平台的登录密码。</p>
+<p>由于各种各样的原因，程序猿一般都有多台电脑或多个开发系统环境，同样也有多个Git账户，最起码的可能有一个GitHub账户加公司内部的一个GitLab账户。可能不同的账户有不同的用户名，邮箱等。</p>
+<h2 id="1-_生成SSH密钥">1. 生成SSH密钥</h2><ul>
+<li><h4 id="生成默认公钥">生成默认公钥</h4>先确认系统中是否已有默认的SSH密钥（使用的是公钥，之后都称公钥）存在。</li>
+</ul>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~<span class="regexp">/.ssh/id</span>_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>如果已经有了则不用生成默认的公钥了，如果没有，则按照如下命令生成。生成后再用上述<code>cat</code>命令查看公钥。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"<span class="variable">$your_email</span>"</span></span><br></pre></td></tr></table></figure>
+<p>将上述的<code>$your_email</code>替换为你想使用的默认email地址。如我在工作电脑上生成默认公钥时邮箱使用的是公司内部邮箱。在私人电脑上则用的是本人Gmail邮箱。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html" data-id="cin8jjiiw0001a2hibkg6j28l" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-memoization" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/22/python-memoization.html" class="article-date">
+  <time datetime="2016-01-22T06:43:16.000Z" itemprop="datePublished">2016-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="记忆化（Memoization）介绍">记忆化（Memoization）介绍</h2><p>简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。<br><strong>有一个限制条件是该函数必须是纯函数式的</strong>，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，<code>square(3)</code> 的结果永远是<code>9</code>，所以我们才能把它的结果存储起来，下次需要知道<code>3</code>的平方的结果时，无需计算，直接从内存中读取就好了。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/01/22/python-memoization.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2016/01/22/python-memoization.html" data-id="cin8jjije0009a2hiucpipp3n" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2016/01/22/python-memoization.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-dive-into-python-decorator" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/14/dive-into-python-decorator.html" class="article-date">
+  <time datetime="2016-01-14T05:52:34.000Z" itemprop="datePublished">2016-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有朋友说看到《Python CookBook》的装饰器部分有些迷糊，究其原因是没有清晰地理解Python装饰器是什么，能干什么。于是有了本文。看此文时，从头到尾跟着思路走，应该会对Python装饰器有更明白深刻的认识。新手不要跳读，新手不要跳读，新手不要跳读。<br>本文假定你已经明白了Python中什么叫做函数，变量的作用域、解析规则及生存周期。阿驹还是简单阐述一下：</p>
+<ul>
+<li><strong>作用域</strong>: 变量起作用的范围， 也称之为命名空间。以方法、类、函数、模块、包、Python内置环境(当前Python解释器的Python Path里所包含的)这几个的程序结构为单元，以<code>大结构</code>包含<code>小结构</code>，<code>外层</code>包含<code>内层</code>的方式，把变量放置在这样一个个的空间中，一个程序结构单元就对应一个作用域（命名空间）。每个变量，不加global和nonlocal关键字时，只属于声明该变量的这层作用域。
+        
+          <p class="article-more-link">
+            <a href="/2016/01/14/dive-into-python-decorator.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2016/01/14/dive-into-python-decorator.html" data-id="cin8jjikh0011a2hi53z3kzo1" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-getting-started-with-python-books" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/21/getting-started-with-python-books.html" class="article-date">
+  <time datetime="2015-12-21T06:33:34.000Z" itemprop="datePublished">2015-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/21/getting-started-with-python-books.html">Python入门、基础书籍简评与推荐</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文对Python网友讨论较多的几本基础入门书籍做个简评，给新手朋友们一个参考。本文仅代表阿驹的个人对它们的意见，不一定完全正确，但站在阿驹的角度看来，是很中肯的。</p>
+<h3 id="《简明Python教程》">《简明Python教程》</h3><ul>
+<li>英文原版名为《A Byte of Python》。它非常简明扼要地介绍了Python语言基础的各个方面。</li>
+<li>适合群体：<ol>
+<li>仅仅临时使用Python的新手，非专业性地临时运用十来行简单代码就能自动化处理一些工作。</li>
+<li>非常熟练编程的老手，深谙编程本质，换语言不过是换工具而已，通过简要地提点，其他诸多方面自然通晓，辅以浏览官方文档和《Python Cookbook》此类书籍，就和Python熟手无异。
+        
+          <p class="article-more-link">
+            <a href="/2015/12/21/getting-started-with-python-books.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/12/21/getting-started-with-python-books.html" data-id="cin8jjik4000va2hi9mhhiue7" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/12/21/getting-started-with-python-books.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-how-to-choose-python-GUI-toolkit-library" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html" class="article-date">
+  <time datetime="2015-12-08T08:40:50.000Z" itemprop="datePublished">2015-12-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html">简单明了地选择Python GUI库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>可用于Python GUI程序开发，优秀且更新“跟得上时代”的库有 <strong>wxPython</strong> 、<strong>PyQT</strong>(PySide)、<strong>Kivy</strong>  、<strong>Libavg</strong> ，当然还有 Python 内置的 <strong>Tkinter</strong> 。像 PyGUI 、PyGTK 、PySWT 等，由于上次更新距现在太为久远且文档、学习资料、稳定性等诸多考虑，阿驹认为它们并不适合于开发一个正式的项目，就不作介绍。</p>
+<h2 id="各种_Python_GUI_库简介">各种 Python GUI 库简介</h2><h3 id="1-_wxPython">1. wxPython</h3><ul>
+<li>跨平台，Windows / Unix / unix-like / OS X</li>
+<li>包装的是 <a href="http://wxwidgets.org/">wxWidgets</a>，C++写成的</li>
+<li>完全开源，可以任意用于自己的开源或商业项目</li>
+<li>不支持 Python3.x （新启了一个名为 Phoenix 项目，支持 Python 3.x，尚未正式发布）</li>
+<li>学习资料《wxPython in Action》、《wxPython 2.8 Application Development Cookbook》，均有中文版</li>
+<li>有第三方提供的图形化界面设计工具，但还是有瑕疵，不如PyQT的强大</li>
+<li>看起来非常本地化地界面
+        
+          <p class="article-more-link">
+            <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/12/08/how-to-choose-python-GUI-toolkit-library.html" data-id="cin8jjijs000ja2hirdri3697" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/12/08/how-to-choose-python-GUI-toolkit-library.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kivy/">Kivy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyQT/">PyQT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wxPython/">wxPython</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-implemention-of-encrypt-download-links" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/03/implemention-of-encrypt-download-links.html" class="article-date">
+  <time datetime="2015-12-03T10:22:28.000Z" itemprop="datePublished">2015-12-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/03/implemention-of-encrypt-download-links.html">Python web 加密下载链接的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="需求背景">需求背景</h2><p>文件上传下载绝对是Web攻防中一个重要的突破口。网络安全日益受重视的今天，web开发中除了要对文件上传进行严格的权限控制，文件下载亦是如此。不可随意暴露服务器端信息，以及用户信息。<br>其他技术栈的网站也可以作参考。</p>
+<h2 id="实例">实例</h2><p>设有银行网站 WEB_SERVER , 另有银行每月交易流水日志文件服务器 LOG_SERVER , 用户在 BANK_WEB 的 “个人中心” 里可以 “下载流水日志”。<br>用户点击 “下载流水日志” 后，选择想要流水日志的年月，WEB_SERVER 返回的是一个加密的下载链接，此链接可以由浏览器当时执行，也可放在下载工具中下载。也有如下安全性要求。</p>
+<ul>
+<li>用户无法构造文件的URL</li>
+<li>不直接暴露文件的绝对路径</li>
+<li>开始下载之前不暴露文件名</li>
+<li>可以进行权限控制，无权限者无法下载</li>
+<li>下载链接有过期时间</li>
+<li>还可以实现其他你可以想到的功能</li>
+<li>文件下载服务器只需提供文件，无须管理用户信息
+        
+          <p class="article-more-link">
+            <a href="/2015/12/03/implemention-of-encrypt-download-links.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/12/03/implemention-of-encrypt-download-links.html" data-id="cin8jjijn000fa2hirakqjex1" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/12/03/implemention-of-encrypt-download-links.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-fix-pip-to-python2-after-upgrade-pip3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html" class="article-date">
+  <time datetime="2015-11-26T09:27:10.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html">修复pip升级后pip与pip3命令均安装三方包至python3目录下</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="状况描述">状况描述</h2><p>目前安装好较新的 Linux 发行版后，系统默认已经安装好了 python2 与 python3 。有时，也需要在这两种 python 环境下方便地安装python包。而根据 <a href="https://pip.pypa.io/en/stable/installing/">pip的安装文档</a> 安装好了pip以后，默认情况下是安装在python2下面的（因为Linux默认的python版本是2）。</p>
+<p>然而我们再执行 <code>python3 get-pip.py</code> 来为 python3 装好pip后，我们发现如下情况：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>pip -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python3</span>.4/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 3.4)</span></span><br><span class="line"><span class="variable">$ </span>pip3 -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python3</span>.4/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 3.4)</span></span><br><span class="line"><span class="variable">$ </span>pip2 -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python2</span>.7/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 2.7)</span></span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html" data-id="cin8jjik8000xa2hit4stzsum" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-git-merge-multiple-commits" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/11/git-merge-multiple-commits.html" class="article-date">
+  <time datetime="2015-11-11T08:18:35.000Z" itemprop="datePublished">2015-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/11/git-merge-multiple-commits.html">git合并多个提交commits</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>阿驹的工作和个人项目都使用Git作为版本控制工具。与Subversion相比，Git更具Geek范，熟练之后感觉灵活强大。</p>
+<p>在我们针对某个功能多次commit提交代码以后，很可能会希望将这多个commit合并为一个，再向master分支提MR（Merge Request, GitLab这样称呼；Github称为Pull Request）。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/11/git-merge-multiple-commits.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/11/11/git-merge-multiple-commits.html" data-id="cin8jjik1000ta2hiaizeke6f" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/11/11/git-merge-multiple-commits.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Python-character-encoding-explained" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/10/Python-character-encoding-explained.html" class="article-date">
+  <time datetime="2015-11-10T10:33:09.000Z" itemprop="datePublished">2015-11-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/10/Python-character-encoding-explained.html">字符编码及Python中文处理精解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="本文目的">本文目的</h2><p>为 Python 程序员简练地介绍字符编码相关支持，彻底解疑“ Python 中文乱码”，“ Python 2与 Python 3 字符编码差异”等相关问题。使用其他语言的程序员可作参考，道理都是相通的，不过具体处理方式不同罢了。</p>
+<h2 id="痛苦的根源">痛苦的根源</h2><ul>
+<li><p><strong>起因</strong><br>计算机不能直接识别<strong>字符</strong>（文本的最小组成单位）。</p>
+<ul>
+<li>字形：<br>字的形状，又叫字图。文字的抽象形状，“小短横线”就是汉字“一”的字形。</li>
+<li>字符：<br>抽象符号和数字成对编码用于在计算机系统中表示的信息单位。虽然字符本身是抽象的，但它一旦存在于计算机系统中，它就对应了某种特定字符编码方式。字符“一”在GBK编码中是0xD2BB。</li>
+<li>字体：<br>字的形体。草书、行书、楷书，都叫字体。计算机中的字体如：华文行楷，微软雅黑。</li>
+</ul>
+</li>
+<li><p><strong>解决办法</strong><br>但是计算机可以识别二进制数，于是采用一个二进制数来指代一个<strong>字符</strong>。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/10/Python-character-encoding-explained.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/11/10/Python-character-encoding-explained.html" data-id="cin8jjikt001aa2hivckkryl3" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/11/10/Python-character-encoding-explained.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符编码/">字符编码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-python-is-compiler-or-interpreter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/29/python-is-compiler-or-interpreter.html" class="article-date">
+  <time datetime="2015-10-29T05:57:40.000Z" itemprop="datePublished">2015-10-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/29/python-is-compiler-or-interpreter.html">Python是编译型还是解释型语言？与Java有何不同？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前段时间有几个人在群里争论Java和Python是编译型还是解释型语言。阿驹在这里谈谈自己的看法。<br>毕竟作为曾经的Java程序员，猿！</p>
+<blockquote>
+<p><strong>广而告之:</strong> 学习Python的同学可以加QQ群<code>249708924</code>，或者搜索<code>细学Python</code>即可申请加入。</p>
+</blockquote>
+<p>以下探讨建立在标准Java、CPython的基础上, 不讨论PyPy等。</p>
+<h2 id="先说结论">先说结论</h2><p>Java既是解释型也是编译型，CPython是解释型。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/10/29/python-is-compiler-or-interpreter.html#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/10/29/python-is-compiler-or-interpreter.html" data-id="cin8jjijk000da2hifgezqksj" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/10/29/python-is-compiler-or-interpreter.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">阿驹</a>
+      &copy; 2016 阿驹<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'aju';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.scrollLoading.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

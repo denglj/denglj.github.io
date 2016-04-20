@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>字符编码及Python中文处理精解 | 阿驹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文目的为 Python 程序员简练地介绍字符编码相关支持，彻底解疑“ Python 中文乱码”，“ Python 2与 Python 3 字符编码差异”等相关问题。使用其他语言的程序员可作参考，道理都是相通的，不过具体处理方式不同罢了。
+痛苦的根源
+起因计算机不能直接识别字符（文本的最小组成单位）。
+
+字形：字的形状，又叫字图。文字的抽象形状，“小短横线”就是汉字“一”的字形。
+字符：抽象符号和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符编码及Python中文处理精解">
+<meta property="og:url" content="http://ajucs.com/2015/11/10/Python-character-encoding-explained.html">
+<meta property="og:site_name" content="阿驹">
+<meta property="og:description" content="本文目的为 Python 程序员简练地介绍字符编码相关支持，彻底解疑“ Python 中文乱码”，“ Python 2与 Python 3 字符编码差异”等相关问题。使用其他语言的程序员可作参考，道理都是相通的，不过具体处理方式不同罢了。
+痛苦的根源
+起因计算机不能直接识别字符（文本的最小组成单位）。
+
+字形：字的形状，又叫字图。文字的抽象形状，“小短横线”就是汉字“一”的字形。
+字符：抽象符号和">
+<meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符编码及Python中文处理精解">
+<meta name="twitter:description" content="本文目的为 Python 程序员简练地介绍字符编码相关支持，彻底解疑“ Python 中文乱码”，“ Python 2与 Python 3 字符编码差异”等相关问题。使用其他语言的程序员可作参考，道理都是相通的，不过具体处理方式不同罢了。
+痛苦的根源
+起因计算机不能直接识别字符（文本的最小组成单位）。
+
+字形：字的形状，又叫字图。文字的抽象形状，“小短横线”就是汉字“一”的字形。
+字符：抽象符号和">
+  
+    <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70781226-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">阿驹</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/denglj/denglj.github.io" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/21/getting-started-with-python-books.html">Python入门、基础书籍简评与推荐</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/08/how-to-choose-python-GUI-toolkit-library.html">简单明了地选择Python GUI库</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kivy/">Kivy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/">PIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pillow/">Pillow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQT/">PyQT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wxPython/">wxPython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符编码/">字符编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信开发/">微信开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Kivy/" style="font-size: 10px;">Kivy</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Pillow/" style="font-size: 10px;">Pillow</a> <a href="/tags/PyQT/" style="font-size: 10px;">PyQT</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wxPython/" style="font-size: 10px;">wxPython</a> <a href="/tags/字符编码/" style="font-size: 10px;">字符编码</a> <a href="/tags/微信开发/" style="font-size: 10px;">微信开发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-Python-character-encoding-explained" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/10/Python-character-encoding-explained.html" class="article-date">
+  <time datetime="2015-11-10T10:33:09.000Z" itemprop="datePublished">2015-11-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      字符编码及Python中文处理精解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="本文目的">本文目的</h2><p>为 Python 程序员简练地介绍字符编码相关支持，彻底解疑“ Python 中文乱码”，“ Python 2与 Python 3 字符编码差异”等相关问题。使用其他语言的程序员可作参考，道理都是相通的，不过具体处理方式不同罢了。</p>
+<h2 id="痛苦的根源">痛苦的根源</h2><ul>
+<li><p><strong>起因</strong><br>计算机不能直接识别<strong>字符</strong>（文本的最小组成单位）。</p>
+<ul>
+<li>字形：<br>字的形状，又叫字图。文字的抽象形状，“小短横线”就是汉字“一”的字形。</li>
+<li>字符：<br>抽象符号和数字成对编码用于在计算机系统中表示的信息单位。虽然字符本身是抽象的，但它一旦存在于计算机系统中，它就对应了某种特定字符编码方式。字符“一”在GBK编码中是0xD2BB。</li>
+<li>字体：<br>字的形体。草书、行书、楷书，都叫字体。计算机中的字体如：华文行楷，微软雅黑。</li>
+</ul>
+</li>
+<li><p><strong>解决办法</strong><br>但是计算机可以识别二进制数，于是采用一个二进制数来指代一个<strong>字符</strong>。</p>
+<a id="more"></a></li>
+<li><strong>结果</strong><br>很多人都想到了这个解决办法。比如拉丁字母，他们想到了用十进制65来表示字符’A’。不同国家或者不同组织，他们因为事先没有商量，都用了同一个整数来表示他们自己国家里的某个文字。在不相互沟通的时候相安无事，但相互沟通时，就出现了问题。</li>
+</ul>
+<h2 id="编码与解码">编码与解码</h2><p>  先记住，任何信息，存放在存储介质中时，都是二进制流（比特流）。</p>
+<ul>
+<li><strong>编码过程</strong>： 字符转换成二进制流表示的过程。</li>
+<li><strong>解码过程</strong>： 二进制流转换成字符的过程。</li>
+<li><strong>编码规则</strong>： 编码和解码过程中遵循的规则，例如GBK编码，UTF-8编码。</li>
+</ul>
+<h2 id="字符编码的来龙去脉">字符编码的来龙去脉</h2><h3 id="ASCII">ASCII</h3><p>  美国信息交换标准代码，最早的通用编码方案。开始时，只用7个比特位就表示完了所有拉丁文字母和一些符号，共128个。后来发现不够用，又启用了第8位，刚好一个字节的长度，共256个字符。</p>
+<p>  但是，不同的公司/组织把这扩展出来的128个<strong>码位</strong>指派给了不同的字符，文档交流就困难了。于是ANSI这个组织站出来了，制定了ANSI标准。</p>
+<p>  而且人们也发现，ASCII这种单字节（因为它占8个比特位）编码满足不了更多的字符需求，那必须得用多个字节编码。多字节字符集（MBCS）概念就诞生了。</p>
+<h3 id="ANSI">ANSI</h3><p>  美国国家标准协会认可的标准。注意，它是一种标准，而不是某种具体编码，可以看做是编码的一种分类。ANSI的标准就是，ASCII码占用的码位及其所指代的字符不许改变，剩下的自己扩展。</p>
+<p>  中国人在这个规定上有自己的扩展（如GBK），英国人也有自己的扩展（如ISO-8859-1,即latin-1）。所以ISO-8859-1和GBK都可以称之为ANSI编码，因为它们符合ANSI规定。以Windows系统为例，中文系统中所指的ANSI编码就是GBK，英文系统中的ANSI编码就是ISO-8859-1。</p>
+<h3 id="MBCS">MBCS</h3><p>  多字节字符集(Multi-Byte Character Set)，采用不定长度可以是一个字节，也可以是两个字节，也可以是三个字节来进行编码。大多数情况下2个字节就够用了，汉字就分配两个字节，称之为<strong>DBCS</strong>（Double-Byte Chactacter Set）。</p>
+<p>  在Linux系统中看得到MBCS说法，在Windows中呢？其实就是ANSI，ANSI只规定了第一个字节的位置是ASCII，超出这个范围的，肯定也是多字节的了。</p>
+<h3 id="CodePage">CodePage</h3><p>  代码页，把一种字符编码方式（和字符集有区别，稍后讲解）放在一个CodePage上，编码解码就像翻书查字典似的。很多个代码页，也就容纳了很多种编码方式。<br>  这个概念最早来自IBM，但也被微软等公司采用。同一种编码方式，在不同的公司制定的CodePage里“页码”也不相同。比如UTF-8，在微软的CodePage里是65001，在IBM里是1208。</p>
+<p>  <strong>注意</strong>：MBCS、DBCS、CodePage、ANSI，它们各自指代的不是某种具体编码，而是符合某种规则的编码方式的统称。在不同的操作系统或平台下，它们有一个默认值而已。</p>
+<p>  PS： 微软的CP936不等于GBK，它们有几十个不太常用的字符不同。所以绝大多数情况下感觉不到差异。</p>
+<h3 id="Unicode/UCS">Unicode/UCS</h3><p>  通过以上的介绍知道，各种解决方案都是各自为政，解决不了 <strong>“同一个系统中同时显示全宇宙的所有字符”</strong> 这个问题。</p>
+<p>  于是就有两个组织，他们开始着手做这件事情，UCS和Unicode诞生了。</p>
+<ul>
+<li><strong>通用字符集</strong>（UCS，Universal Character Set）是由国际标准化组织（ISO）制定的 ISO 10646标准所定义的字符集。通常也译为<strong>通用多八位编码字符集</strong>。</li>
+<li><strong>统一码</strong>（Unicode）是由统一码联盟指定的。</li>
+</ul>
+<p>  后来发现，一山不容二虎，世界人民不需要两个目的相同但是具体实现却有差异的编码方案。UCS和Unicode握手言和，从 Unicode 2.0 起，采用了和ISO 10646-1的编码方案，它们在相同的码位上都对应同样的字符。尽管这两个组织目前还在相互独立的在发布字符编码标准。</p>
+<p>  可能是Unicode名字好记，所以采用更为广泛。关于UCS-2，UCS-4这些概念不再赘述，自行查阅。</p>
+<h4 id="Unicode，UTF-8，UTF-16它们是什么关系">Unicode，UTF-8，UTF-16它们是什么关系</h4><p>  UTF-8（Unicode Transformation Format）即Unicode转换格式，8的意思是使用8比特为单位来进行编码。码位小于128时，就是对应的字节值；大于等于128时，就会转换成2、3、4字节的序列。每个字节的序列值介于128~255。</p>
+<p>  GBK，GB2312，Latin-1，Big-5，ASCII等，它们的字符集和具体编码实现方式绑定（如GBK字符集就采用GBK编码方式），即字符和存储在介质上的二进制流一一对应。缺陷很明显，字符集扩展性差。Unicode考虑了这个问题，所以它的编码与编码的实现方式没有绑定。而是有多种实现方式，如UTF-8，UTF-16，UTF-32。</p>
+<p>  例如字符‘A’在Unicode中的编码是65，但存储在介质上时，二进制流的十六进制表示采用UTF-8时是0x41，而UTF-16<strong>大端模式</strong>是0x00 0x41。</p>
+<p>  至于什么是大端模式、小端模式，UTF-X，GBXXX的具体编码实现方式请自行查阅。</p>
+<h3 id="内码与外码">内码与外码</h3><ul>
+<li><strong>内码</strong>：存储在介质上时使用的编码形式。例如GBK，GB2312。</li>
+<li><strong>外码</strong>：外部输入系统时的编码。例如拼音输入法编码，仓颉输入法编码。</li>
+</ul>
+<p>  例如：采用仓颉输入法对汉字“驹”的编码是<code>NMPR</code>，输入系统以后得到字符“驹”。使用GBK作为内码进行存储时就是<code>0xBED4</code>。</p>
+<h2 id="乱码产生的原因">乱码产生的原因</h2><p>  <strong>编码和解码时用了不同或者不兼容的字符编码方式。</strong>就算同是Unicode，UTF-8和UTF-16也是不同的。</p>
+<p>  <strong>解决乱码问题，需要把握的要点</strong>：</p>
+<ul>
+<li><strong>输入某软件系统时字符所采用的编码是什么？</strong>（从数据库或文件读取时，原来存储时的编码是什么？从网页抓取时，网页的编码是什么？从控制台输入时，控制台的编码方式是什么？）</li>
+<li><strong>软件系统中的编码方式是什么？</strong>（原本若是UTF-8存储，GBK编码的软件系统该如何处理？）</li>
+<li><strong>输出时的编码方式是什么？</strong>（如Python脚本处理后的字符串是Unicode编码，输出到采用GBK编码的Windows控制台时应该做什么？）</li>
+</ul>
+<h2 id="Python_2-x字符编码问题">Python 2.x字符编码问题</h2><h3 id="Python_2_字符（串）类型探究">Python 2 字符（串）类型探究</h3><ul>
+<li><p><strong><code>basestring</code></strong> ：str 和 unicode 对象的基类，抽象的，不可被调用或实例化，仅可用于类型检查。<code>isinstance(obj, basestring)</code> 等价于 <code>isinstance(obj, (str, unicode))</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>isinstance(<span class="string">'驹'</span>, basestring)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>isinstance(<span class="string">u'驹'</span>, basestring)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>str</code></strong> ：实际是字节串。Python2中也有<code>bytes</code>对象。<code>bytes == str</code> 结果为<code>True</code>。例如：‘驹’，这个字符串长度为1，但<code>len(&#39;驹&#39;)</code>在windows平台下是2（默认GBK），Linux平台下是3（默认UTF-8）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>isinstance(<span class="string">'驹'</span>, str)</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>isinstance(<span class="string">u'驹'</span>, str)</span><br><span class="line"><span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>unicode</code></strong> ：<code>unicode(string[, encoding, errors])</code> ,按照encoding参数指定的编码方式把参数string转换成unicode。unicode编码的字符串对象，也可以直接加前缀u表示。<code>len(u&#39;驹&#39;)</code>在Windows和Linux下都是1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;&gt; </span>isinstance(<span class="string">'驹'</span>, unicode)</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>isinstance(<span class="string">u'驹'</span>, unicode)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+<p>unicode构造器的参数encoding默认是7位ASCII编码，所以默认时传入的字节串或字符串的每一个字节值必须小于128：</p>
+<ul>
+<li><p>Windows系统下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Win平台默认情况下就是GBK编码，所以以下结果就是GBK编码值</span><br><span class="line">&gt;&gt;&gt; '驹'</span><br><span class="line">'\xbe\xd4'</span><br><span class="line"></span><br><span class="line"># 报错，试图用 unicode 方法默认的 ASCII 编码去解码 GBK 编码的字符</span><br><span class="line">&gt;&gt;&gt; unicode('驹')</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">......</span><br><span class="line">UnicodeDecodeError: 'ascii' codec can't decode byte 0xbe ...</span><br><span class="line"></span><br><span class="line">#正确，录入时以GBK编码，故而以GBK方式去解码，再转换成 Unicode 形式</span><br><span class="line">&gt;&gt;&gt; unicode('驹', 'GBK')   # 等价于 u'驹'</span><br><span class="line">u'\u9a79'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux系统下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Linux平台默认情况下就是UTF-8编码，所以以下结果就是UTF-8编码值</span><br><span class="line">&gt;&gt;&gt; '驹'</span><br><span class="line">'\xe9\xa9\xb9'</span><br><span class="line"></span><br><span class="line"># 报错，试图用 unicode 方法默认的 ASCII 编码去解码 UTF-8 编码的字符</span><br><span class="line">&gt;&gt;&gt; unicode('驹')</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">......</span><br><span class="line">UnicodeDecodeError: 'ascii' codec can't decode byte 0xbe ...</span><br><span class="line"></span><br><span class="line">#正确，录入时以GBK编码，故而以GBK方式去解码，再转换成 Unicode 形式</span><br><span class="line">&gt;&gt;&gt; unicode('驹', 'UTF-8')   # 等价于 u'驹'</span><br><span class="line">u'\u9a79'</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p><strong>总结1： 通过系统shell录入或直接在程序中定义的字符串，Python 2 中默认就是str对象（字节串），其字节值是由系统默认编码方式编码所得，Windows是GBK编码方式，Linux是UTF-8。</strong></p>
+<p>所以我们向某个媒介（文件、网页/浏览器、系统Shell或其他软件呈现文本的区域）输出字符串内容时，要用该媒介接收的编码形式编码字符串后再传递给它。</p>
+</blockquote>
+<p>例如，要从shell中输出字符串时（新手常用urlopen打开一个网页，然后print网页内容），必须将字符串转换为当前的shell使用的编码形式。如，Windows 的 cmd 是GBK，Linux 的 bash 是UTF-8。PyCharm 自带的shell不管是Windows还是Linux都是UTF-8。</p>
+</li>
+</ul>
+<h3 id="encode_与_decode_方法">encode 与 decode 方法</h3><ul>
+<li><p><code>S.encode([encoding[,errors]]) -&gt; object</code></p>
+<p>文档解释：用编解码器注册的编码方式来<strong>编码</strong>字符串S。encoding参数的默认值就是Python默认的编码方式。errors默认值是’strict’，严格模式，一旦编码出错就抛出 UnicodeEncodeErrors 异常，还可以是’ignore’（忽略错误）, ‘replace’（将出错的字串替换，一般是替换为问号）。</p>
+</li>
+<li><p><code>S.decode([encoding[,errors]]) -&gt; object</code></p>
+<p>文档解释：用编解码器注册的编码方式来<strong>解码</strong>字符串S。参数与encode的一致。</p>
+</li>
+<li><p>Linux平台下实验观察（Win平台结果也同样，不过是win默认为GBK编码）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s1 = 'abc驹'        # Python2下默认的是str对象，实际是字节串，utf-8编码的</span><br><span class="line">&gt;&gt;&gt; s2 = u'abc驹'       # unicode字符串</span><br><span class="line">&gt;&gt;&gt; s1</span><br><span class="line">'abc\xe9\xa9\xb9'</span><br><span class="line">&gt;&gt;&gt; s2</span><br><span class="line">u'abc\u9a79'</span><br><span class="line"></span><br><span class="line"># 把 str 对象，已经是utf-8编码形式的字串再来encode</span><br><span class="line">&gt;&gt;&gt; s1.encode('UTF-8')</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line"># 奇怪的是此处报 UnicodeDecodeError 注意我们用的是encode方法</span><br><span class="line">UnicodeDecodeError: 'ascii' codec can't decode byte 0xe9 ...</span><br><span class="line"></span><br><span class="line"># 把unicode字串按utf-8形式编码，正确</span><br><span class="line">&gt;&gt;&gt; s2.encode('UTF-8')</span><br><span class="line">'abc\xe9\xa9\xb9'</span><br><span class="line"></span><br><span class="line"># 把unicode字串按gbk形式编码，正确</span><br><span class="line">&gt;&gt;&gt; s2.encode('GBK')</span><br><span class="line">'abc\xbe\xd4'</span><br><span class="line"></span><br><span class="line"># 把unicode字串按ASCII编码，用法正确，但报错，因为ASCII编码不了'驹'这个汉字。</span><br><span class="line">&gt;&gt;&gt; s2.encode('ASCII')</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">UnicodeEncodeError: 'ascii' codec can't encode character u'\u9a79' ...</span><br><span class="line"></span><br><span class="line"># 把unicode字串按ASCII编码，忽略编码不了的错误，不会报错，只剩下能被ASCII编码的字符</span><br><span class="line">&gt;&gt;&gt; s2.encode('ASCII', 'ignore')</span><br><span class="line">'abc'</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>总结2： encode的作用是将unicode对象（没有某种具体编码）字串按encoding参数给定的编码方式转换为str对象（具有某种具体编码）字串。故而用str对象调用encode方法是错误的。</strong></p>
+<p><strong>总结3： decode的作用是将str对象字串（某种具体编码的）按照encoding参数给定的编码方式解码成unicode对象。故而用unicode对象调用decode方法是错误的。</strong></p>
+</blockquote>
+<p>所以，在使用encode方法时，首先确认是unicode对象在调用它，这个方法会将unicode形式转换成某种具体编码形式的字符串。decode方法是将某种具体的编码的字串解码还原成unicode统一码，必须确认是str对象在调用它，而且encoding参数必须是调用它的字符串的具体编码形式，否则可能出错。</p>
+<p>上面三段话多读几遍，被我洗一下脑，然后就明白什么时候该encode, 什么时候该decode，什么时候该传gbk，什么时候该传utf-8，而不是乱猜的。</p>
+</li>
+</ul>
+<h2 id="Python_3-x字符编码问题">Python 3.x字符编码问题</h2><p>  看完了Python2.x中，什么basestring, str, unicode, 一会儿Python默认ascii编码，一会儿系统默认是GBK编码，也是醉了，所以处理多字节编码时一不小心就会出错。</p>
+<p>  Python3.x 字符串编码问题轻松了许多，不存在unicode对象了。不论是 <code>&#39;驹&#39;</code> 还是 <code>u&#39;驹&#39;</code> 这两种形式，得到的对象都是<code>str</code> 对象，但内部是unicode方式编码，所以Python3的<code>str</code>对象等价于Python2的<code>unicode</code>对象。</p>
+<p>  那么Python2中的<code>str</code>（字节串）对象在Python3中跑到哪儿去了？ 就是<code>bytes</code>对象，就是个字节序列。</p>
+<p>  而且Python3中更严格。我们知道Python2中不论是str还是unicode对象，都可以调用decode或encode方法，太混乱。</p>
+<p>  在Python3中的<code>str</code>（Python2中的<code>unicode</code>），它是统一码，没有某种具体形式，所以只能被某种具体形式编码，只能调用encode，而不能调用decode。同样，Python3中的<code>bytes</code>对象,如b’\xe9\xa9\xb9’(UTF-8编码形式的’驹’字)，已经具备某种具体编码，只能被解码还原成unicode统一码，所以它之只能调用decode方法，调用encode会报错。</p>
+<blockquote>
+<p>总结4：<br>Python2 ： <code>str</code>–(decode)–&gt; <code>unicode</code> –(encode)–&gt; <code>str</code><br>Python3 ： <code>bytes</code> –(decode)–&gt; <code>str</code> –(encode)–&gt; <code>bytes</code></p>
+</blockquote>
+<p>  Python2中的 str 实际是字节串 bytes , Python3中的 str 实际是unicode编码。不论是Python2或Python3，编码转换都须以unicode作为桥梁。那么decode，encode连用的形式就是用于编码转换。</p>
+<p>  <strong>对于新手来说重要的例子</strong>，在Windows的cmd中写了几句脚本，抓取了一个UTF-8编码的网页，要在cmd里正确打印，就需要<code>page_content.decode(&#39;UTF-8&#39;).encode(&#39;GBK&#39;)</code>，这样打印就不会出乱码。而在linux平台下，因为bash默认是UTF-8方式编码，所以直接<code>print page_content</code>就可正确显示中文字符。</p>
+<h2 id="终极案例">终极案例</h2><p>  写了一个爬虫，抓取的是BIG5编码的繁体中文页面，每抓取一条记录需要从windows控制台打印出来供开发人员查看，而且开发人员还要手动输入一个人工检测编号。然后将检测编号与抓取内容存入以UTF-8方式存储数据的MySQL。虽然是windows平台，但要求以UTF-8的编码保存日志文件。另外其中某段内容你要引用下来放在自己GB2312编码的网页上。</p>
+<ol>
+<li>如果涉及的编码方式较多，管它三七二十一，先将具体编码的转换成unicode的<br><code>uni_content = page_content.decode(&#39;big5&#39;)</code></li>
+<li>打印至windows控制台<br><code>print uni_content.encdoe(&#39;gbk&#39;)</code></li>
+<li>开发人员从cmd输入编号<br><code>no = input(&#39;请输入编号&#39;)   # python2用 raw_input() ,得到的是gbk编码形式的字串</code></li>
+<li>将编号与原内容组合，存入MySQL，日志也是UTF-8，类似的<br><code>new_content</code> = (no.decode(‘gbk’)+uni_content).encode(‘utf-8’)</li>
+<li>将以是UTF-8编码的内容从数据库里拿出来，放入GB2312网页上<br><code>new_page = sql_content.decode(&#39;UTF-8&#39;).encdoe(&#39;GB2312&#39;)</code></li>
+</ol>
+<h2 id="再次提示">再次提示</h2><p>要解决乱码，明白因为编码解码的方式不一致导致的本质，知道每一次操作中输入是什么编码形式，输出需要什么编码形式，通过unicode为桥梁，去解决问题就好了。</p>
+<p>要注意的是，编码间转换数据丢失的问题。例如<code>&#39;abc驹&#39;</code> 能够转换为unicode编码, 通过unicode转为ascii也是可以的，但ascii无法编码汉字，erros参数设为’ignore’时不报错，但只保留下了<code>&#39;abc&#39;</code>。</p>
+<h2 id="更多参考">更多参考</h2><ul>
+<li><a href="https://docs.python.org/3.5/howto/unicode.html" target="_blank" rel="external">Python3 如何使用 unicode</a></li>
+<li><a href="https://docs.python.org/2/howto/unicode.html" target="_blank" rel="external">Python2 如何使用 unicode</a></li>
+</ul>
+
+        <div class="article-rights-info">
+          <li>
+            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
+          </li>
+          <li><strong>发表时间：</strong>2015-11-10 18:33:09</li>
+          <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
+          <li><strong>永久链接：</strong>http://ajucs.com/2015/11/10/Python-character-encoding-explained.html</li>
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2015/11/10/Python-character-encoding-explained.html" data-id="cin8jjikt001aa2hivckkryl3" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2015/11/10/Python-character-encoding-explained.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符编码/">字符编码</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/11/git-merge-multiple-commits.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git合并多个提交commits
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/29/python-is-compiler-or-interpreter.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python是编译型还是解释型语言？与Java有何不同？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">阿驹</a>
+      &copy; 2016 阿驹<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'aju';
+  
+  var disqus_url = 'http://ajucs.com/2015/11/10/Python-character-encoding-explained.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.scrollLoading.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
