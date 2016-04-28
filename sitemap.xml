@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html</loc>
-    <lastmod>2016-04-20T07:40:35.912Z</lastmod>
+    <loc>http://ajucs.com/2016/04/27/Mesosphere-DCOS-Questions.html</loc>
+    <lastmod>2016-04-28T03:25:24.242Z</lastmod>
   </url>
   
   <url>
-    <loc>http://ajucs.com/about/index.html</loc>
-    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
+    <loc>http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html</loc>
+    <lastmod>2016-04-20T07:40:35.912Z</lastmod>
   </url>
   
   <url>
@@ -37,12 +37,12 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
+    <loc>http://ajucs.com/2015/12/21/getting-started-with-python-books.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
   <url>
-    <loc>http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html</loc>
+    <loc>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
@@ -72,7 +72,12 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/2015/12/21/getting-started-with-python-books.html</loc>
+    <loc>http://ajucs.com/about/index.html</loc>
+    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   

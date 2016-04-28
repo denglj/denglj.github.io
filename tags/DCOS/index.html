@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MacOSX10.9.4下安装PIL库失败的解决方法 | 阿驹</title>
+  <title>Tag: DCOS | 阿驹</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装PIL库在Mavericks10.9下安装PIL库失败，这是一个python的图形处理库。错误提示如下：12345678jus-iMac:~ ju$ sudo pip install PILPassword:Downloading/unpacking PIL  Could not find any downloads that satisfy the requirement PIL    So">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MacOSX10.9.4下安装PIL库失败的解决方法">
-<meta property="og:url" content="http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html">
+  <meta name="description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="阿驹">
+<meta property="og:url" content="http://ajucs.com/tags/DCOS/index.html">
 <meta property="og:site_name" content="阿驹">
-<meta property="og:description" content="安装PIL库在Mavericks10.9下安装PIL库失败，这是一个python的图形处理库。错误提示如下：12345678jus-iMac:~ ju$ sudo pip install PILPassword:Downloading/unpacking PIL  Could not find any downloads that satisfy the requirement PIL    So">
-<meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
+<meta property="og:description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MacOSX10.9.4下安装PIL库失败的解决方法">
-<meta name="twitter:description" content="安装PIL库在Mavericks10.9下安装PIL库失败，这是一个python的图形处理库。错误提示如下：12345678jus-iMac:~ ju$ sudo pip install PILPassword:Downloading/unpacking PIL  Could not find any downloads that satisfy the requirement PIL    So">
+<meta name="twitter:title" content="阿驹">
+<meta name="twitter:description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
   
     <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
   
@@ -167,81 +166,39 @@ ga('send', 'pageview');
   
 </aside>
         
-        <section id="main"><article id="post-OSX-install-PIL-library-failure-solution" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/07/11/OSX-install-PIL-library-failure-solution.html" class="article-date">
-  <time datetime="2014-07-11T02:59:59.000Z" itemprop="datePublished">2014-07-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      MacOSX10.9.4下安装PIL库失败的解决方法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/04/27/Mesosphere-DCOS-Questions.html" class="archive-article-date">
+  <time datetime="2016-04-27T21:20:01.000Z" itemprop="datePublished">4月 28</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/04/27/Mesosphere-DCOS-Questions.html">Mesosphere DCOS 常见问题</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装PIL库">安装PIL库</h2><p>在Mavericks10.9下安装PIL库失败，这是一个python的图形处理库。错误提示如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jus-iMac:~ ju$ sudo pip <span class="operator"><span class="keyword">install</span> PIL</span><br><span class="line"><span class="keyword">Password</span>:</span><br><span class="line">Downloading/unpacking PIL</span><br><span class="line">  Could <span class="keyword">not</span> find <span class="keyword">any</span> downloads that satisfy the requirement PIL</span><br><span class="line">    <span class="keyword">Some</span> <span class="keyword">externally</span> hosted files were ignored (<span class="keyword">use</span> <span class="comment">--allow-external PIL to allow).</span></span><br><span class="line">Cleaning up...</span><br><span class="line"><span class="keyword">No</span> distributions <span class="keyword">at</span> all <span class="keyword">found</span> <span class="keyword">for</span> PIL</span><br><span class="line">Storing debug <span class="keyword">log</span> <span class="keyword">for</span> <span class="keyword">failure</span> <span class="keyword">in</span> /<span class="keyword">Users</span>/ju/<span class="keyword">Library</span>/<span class="keyword">Logs</span>/pip.<span class="keyword">log</span></span></span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>再根据错误提示，使用如下命令安装：<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">sudo</span> <span class="comment">pip</span> <span class="comment">install</span> <span class="comment">PIL</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">allow</span><span class="literal">-</span><span class="comment">external</span> <span class="comment">PIL</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">allow</span><span class="literal">-</span><span class="comment">unverified</span> <span class="comment">PIL</span></span><br></pre></td></tr></table></figure></p>
-<p>仍然出错。但这次错误提示变了：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">In</span> <span class="keyword">file</span> included from _imagingtk.c:19:</span><br><span class="line">/Applications/Xcode.<span class="keyword">app</span>/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/<span class="keyword">include</span>/tk.<span class="keyword">h</span>:78:11: fatal <span class="keyword">error</span>: 'X11/Xlib.<span class="keyword">h</span>' <span class="keyword">file</span> not found</span><br><span class="line">#       <span class="keyword">include</span> &lt;X11/Xlib.<span class="keyword">h</span>&gt;</span><br><span class="line">                ^</span><br><span class="line">1 <span class="keyword">error</span> generated.</span><br><span class="line"><span class="keyword">error</span>: command '<span class="keyword">cc</span>' failed with <span class="keyword">exit</span> status 1</span><br></pre></td></tr></table></figure></p>
-<p>安装原版PIL解决办法如下：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/</span>MacOSX.platform<span class="regexp">/Developer/</span>SDKs<span class="regexp">/MacOSX10.9.sdk/</span>System<span class="regexp">/Library/</span>Frameworks<span class="regexp">/Tk.framework/</span>Versions<span class="regexp">/8.5/</span>Headers<span class="regexp">/X11 /</span>usr<span class="regexp">/local/</span>include/X11</span><br><span class="line">export CFLAGS=-Qunused-arguments</span><br><span class="line">export CPPFLAGS=-Qunused-arguments</span><br><span class="line">sudo pip install PIL --allow-external PIL --allow-unverified PIL</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用Pillow代替PIL">使用Pillow代替PIL</h2><p>因为PIL已经很久没更新，而且对Python3不支持。Pillow是从PIL fork的一个分支，更新及时，对Python2/3支持都很友好。完全兼容PIL，可以成为PIL的代替品。<br>安装步骤如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew <span class="operator"><span class="keyword">install</span> libtiff libjpeg webp <span class="keyword">little</span>-cms2</span><br><span class="line">$ pip <span class="keyword">install</span> Pillow</span></span><br></pre></td></tr></table></figure></p>
-
-        <div class="article-rights-info">
-          <li>
-            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
-          </li>
-          <li><strong>发表时间：</strong>2014-07-11 10:59:59</li>
-          <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
-          <li><strong>永久链接：</strong>http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html</li>
-        </div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html" data-id="cinjq8cdc001enihidrayt62x" class="article-share-link">分享</a>
-      
-        <a href="http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html#disqus_thread" class="article-comment-link">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PIL/">PIL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pillow/">Pillow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2014/11/26/the-difference-between-module-import-and-function-import.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Python函数内import和模块顶部import的区别
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-  
 </article>
-
-
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-
+  
+  
+    </div></section>
+  
 </section>
       </div>
       <footer id="footer">
@@ -259,13 +216,11 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'aju';
   
-  var disqus_url = 'http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html';
-  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
