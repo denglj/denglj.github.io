@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何在Python里应用SOLID原则 | 阿驹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如今OOP编程大行其道。不少人以为用编程语言里的class关键字定义一个类，然后用类创建一个对象就是OOP了。肤浅！
+OOP编程很贴近人们的正常思维方式，所以容易被接受，而且应用也很广泛。的确，这给编程带来了很大的好处。但并不是任何人都能深谙OOP的本质。简略证明如下：如果把“女朋友”作为一个类，你自己的女朋友就是你的对象，是“女朋友”类的具体的实例。如果你能熟练掌握“女朋友”这个类的特性以及方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在Python里应用SOLID原则">
+<meta property="og:url" content="http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html">
+<meta property="og:site_name" content="阿驹">
+<meta property="og:description" content="如今OOP编程大行其道。不少人以为用编程语言里的class关键字定义一个类，然后用类创建一个对象就是OOP了。肤浅！
+OOP编程很贴近人们的正常思维方式，所以容易被接受，而且应用也很广泛。的确，这给编程带来了很大的好处。但并不是任何人都能深谙OOP的本质。简略证明如下：如果把“女朋友”作为一个类，你自己的女朋友就是你的对象，是“女朋友”类的具体的实例。如果你能熟练掌握“女朋友”这个类的特性以及方法">
+<meta property="og:updated_time" content="2016-06-17T10:12:52.627Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在Python里应用SOLID原则">
+<meta name="twitter:description" content="如今OOP编程大行其道。不少人以为用编程语言里的class关键字定义一个类，然后用类创建一个对象就是OOP了。肤浅！
+OOP编程很贴近人们的正常思维方式，所以容易被接受，而且应用也很广泛。的确，这给编程带来了很大的好处。但并不是任何人都能深谙OOP的本质。简略证明如下：如果把“女朋友”作为一个类，你自己的女朋友就是你的对象，是“女朋友”类的具体的实例。如果你能熟练掌握“女朋友”这个类的特性以及方法">
+  
+    <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- <link href="//fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css"> -->
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+  <link href='//fonts.useso.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70781226-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <a href="/" class="logo">阿驹</a>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/index.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+        </div>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/denglj/denglj.github.io" title="Fork me on GitHub"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <nav id="mobile-nav" class="off">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/index.html" class="mobile-nav-link">About</a>
+  
+  <div id="search-form-wrap-mobile">
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+  </div>
+</nav>
+      <div class="outer">
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/17/use-S-O-L-I-D-in-python.html">如何在Python里应用SOLID原则</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/27/Mesosphere-DCOS-Questions.html">Mesosphere DCOS 常见问题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/20/use-multi-ssh-key-for-git.html">管理多个SSH Key以支持多个Git账号</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/22/python-memoization.html">Python性能优化之记忆化（Memoization）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/14/dive-into-python-decorator.html">深入浅出Python装饰器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DCOS/">DCOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kivy/">Kivy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mesos/">Mesos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PIL/">PIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pillow/">Pillow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQT/">PyQT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cloud/">cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/">wechat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wxPython/">wxPython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符编码/">字符编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信开发/">微信开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/DCOS/" style="font-size: 10px;">DCOS</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/Kivy/" style="font-size: 10px;">Kivy</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mesos/" style="font-size: 10px;">Mesos</a> <a href="/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/tags/PIL/" style="font-size: 10px;">PIL</a> <a href="/tags/Pillow/" style="font-size: 10px;">Pillow</a> <a href="/tags/PyQT/" style="font-size: 10px;">PyQT</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/cloud/" style="font-size: 10px;">cloud</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/wxPython/" style="font-size: 10px;">wxPython</a> <a href="/tags/字符编码/" style="font-size: 10px;">字符编码</a> <a href="/tags/微信开发/" style="font-size: 10px;">微信开发</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+        <section id="main"><article id="post-use-S-O-L-I-D-in-python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/17/use-S-O-L-I-D-in-python.html" class="article-date">
+  <time datetime="2016-06-17T04:10:31.000Z" itemprop="datePublished">2016-06-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何在Python里应用SOLID原则
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如今OOP编程大行其道。不少人以为用编程语言里的class关键字定义一个类，然后用类创建一个对象就是OOP了。肤浅！</p>
+<p>OOP编程很贴近人们的正常思维方式，所以容易被接受，而且应用也很广泛。的确，这给编程带来了很大的好处。但并不是任何人都能深谙OOP的本质。简略证明如下：如果把“女朋友”作为一个类，你自己的女朋友就是你的对象，是“女朋友”类的具体的实例。如果你能熟练掌握“女朋友”这个类的特性以及方法，还不能创建一个实例么？你没女朋友，说明你没吃透女朋友类，进而说明你肯定没理解好OOP。但创建了一个实例出来也并不能证明你就吃透了这个类。<br><a id="more"></a></p>
+<p>以上是闲话。</p>
+<p>是否感觉你在OOP时总是要么很随意的定义class然后创建object，要么在生搬硬套所谓的设计模式？</p>
+<p>是否感觉你的程序真的很脆弱（比如一天的告警邮件就是几千封）？</p>
+<p>是否觉得灵活性差可扩展性不足（比如要增加新功能，不能通过某种优雅的方式插入现在的系统，而是copy一份类似的代码改一改）？</p>
+<p>是否觉得子模块/子系统之间依赖关系混乱，粘黏性强（你渴望用TDD或unittest来保证系统每次迭代的质量，但你发现基于你的代码难以写testcase，为啥？因为依赖混乱、粘黏性强 独立的程序单元基本没有，没有unit请问怎么unittest？）？</p>
+<p>如果我们的代码存在以上任何一种问题，包括没提到的一些导致系统烂的问题，如果你还在用OOP的话，那么好好根据本文思考一下你的代码该如何改进。</p>
+<h2 id="SOLID是什么？">SOLID是什么？</h2><p><strong>SOLID（单一功能、开闭原则、里氏替换、接口隔离以及依赖反转）</strong>是由罗伯特·C·马丁（其著作有《敏捷软件开发——原则、模式与实践》、《Clean Code》）在21世纪早期引入的记忆术首字母缩略字，<strong>指代了面向对象编程和面向对象设计的五个基本原则。</strong></p>
+<p>SOLID被典型的应用于测试驱动开发（TDD，TDD也并不那么美好，以后再说），并且是敏捷开发以及自适应软件开发的基本原则的重要组成部分。</p>
+<p>如果你们在践行敏捷开发和尝试TDD，那么有什么理由不掌握这五个几本原则呢？这五个原则并完全是罗伯特·C·马丁原创的，别弄混了。</p>
+<p><strong>但是，原则并不是规则，更不是教条，原则对智者来说是指导，对愚者来说是遵从。</strong> SOLID以及本文只起到抛砖引玉的作用。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">首字母</th>
+<th>指代</th>
+<th>概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">S</td>
+<td>单一功能原则</td>
+<td>对象应该仅具有一种单一功能</td>
+</tr>
+<tr>
+<td style="text-align:center">O</td>
+<td>开闭原则</td>
+<td>软件体应该是对于扩展开放的，但是对于修改封闭的</td>
+</tr>
+<tr>
+<td style="text-align:center">L</td>
+<td>里氏替换原则</td>
+<td>程序中的对象应该是可以在不改变程序正确性的前提下被它的子类对象所替换的</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td>接口隔离原则</td>
+<td>多个特定客户端接口要好于一个宽泛用途的接口</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td>依赖反转原则</td>
+<td>高层次的模块不应该依赖于低层次的模块，两者都应该依赖于抽象接口；抽象接口不应该依赖于具体实现，而具体实现则应该依赖于抽象接口。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="为什么要用SOLID原则指导OOP？">为什么要用SOLID原则指导OOP？</h2><p><strong>容易编写易于维护的、复用率高的、易于测试的OO代码。</strong> 为了达到这个目的，你可以自己写上数十万行代码并研究总结出类似的规律，也可以先在这个原则的指导下试试看。</p>
+<h2 id="Talk_is_cheap-_Show_me_the_code-">Talk is cheap. Show me the code.</h2><p>现在我们要用OOP来实现一段最基本的 “洗车服务” 代码。需求如下：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">洗车服务</span><br><span class="line">  -<span class="ruby"> 洗车作业任务</span><br><span class="line"></span>      汽车进入洗车机时</span><br><span class="line">        注册洗车任务</span><br><span class="line">  -<span class="ruby"> 顾客通知</span><br><span class="line"></span>      洗车完毕</span><br><span class="line">        向顾客发出消息通知</span><br><span class="line">  -<span class="ruby"> 报表</span><br><span class="line"></span>      客户端发出报表请求时</span><br><span class="line">        向该顾客展示他的所有洗车信息</span><br></pre></td></tr></table></figure></p>
+<p>也许你的代码其中一段如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CarWashService</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sms_sender)</span>:</span></span><br><span class="line">        self.persistence = &#123;&#125;</span><br><span class="line">        self.sms_sender = sms_sender</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">require_car_wash</span><span class="params">(self, car, customer)</span>:</span></span><br><span class="line">        service_id = uuid.uuid4().hex</span><br><span class="line">        self.persistence[service_id] = (car, customer)</span><br><span class="line">        <span class="keyword">return</span> service_id</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wash_completed</span><span class="params">(self, service_id)</span>:</span></span><br><span class="line">        car, costomer = self.persistence[service_id]</span><br><span class="line">        self.sms_sender.send(mobile_phone=customer.mobile_phone,</span><br><span class="line">            text=<span class="string">'Car %&#123;car.plate&#125; washed'</span>.format(car=car))</span><br></pre></td></tr></table></figure></p>
+<h2 id="单一职责原则">单一职责原则</h2><p>为什么要遵循这个原则？交警在路边可以去劝阻路边打架斗殴的，在民警未到时也应该去劝阻，但交警就该去劝架了吗？道路交通怎么办？让民警又干什么？在纠纷频发的地方如果只有交警而无民警，那是治安体制有问题没在那里安插民警，而不是交警袖手旁观。</p>
+<p>所以，<strong>分清楚你“必须做”和“可以做”的事情</strong>。每个角色做好必须做的事情就很好了。如果还有一些事情没人做，那就创造角色让他去做。</p>
+<p>那么以单一职责原则来看上面的代码有什么问题？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CarWashService</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sms_sender)</span>:</span></span><br><span class="line">        self.persistence = &#123;&#125;    <span class="comment"># A</span></span><br><span class="line">        self.sms_sender = sms_sender  <span class="comment"># B</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">require_car_wash</span><span class="params">(self, car, customer)</span>:</span></span><br><span class="line">        service_id = uuid.uuid4().hex</span><br><span class="line">        self.persistence[service_id] = (car, customer)    <span class="comment"># A</span></span><br><span class="line">        <span class="keyword">return</span> service_id</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wash_completed</span><span class="params">(self, service_id)</span>:</span></span><br><span class="line">        car, costomer = self.persistence[service_id]      <span class="comment"># A</span></span><br><span class="line">        self.sms_sender.send(mobile_phone=customer.mobile_phone,</span><br><span class="line">            text=<span class="string">'Car %&#123;car.plate&#125; washed'</span>.format(car=car))    <span class="comment"># B</span></span><br></pre></td></tr></table></figure></p>
+<p>经过一点改造后，写出了下面的代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CarWashService</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, notifier, repository)</span>:</span></span><br><span class="line">        self.notifier = notifier</span><br><span class="line">        self.repository = repository</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">enter_in_car_wash</span><span class="params">(self, car, customer)</span>:</span></span><br><span class="line">        job = CarWashJob(car, costomer)</span><br><span class="line">        self.repository.put(job)</span><br><span class="line">        <span class="keyword">return</span> job</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wash_completed</span><span class="params">(self, service_id)</span>:</span></span><br><span class="line">        car_wash_job = self.repository.find_by_id(service_id)</span><br><span class="line">        self.notifier.job_completed(car_wash_job)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">service_by_customer</span><span class="params">(self, customer)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.repository.find_by_customer(customer)</span><br></pre></td></tr></table></figure></p>
+<h2 id="依赖反转原则">依赖反转原则</h2><p>为何要遵循这个原则？你会把台灯电线直接焊接在墙上的电线上吗？</p>
+<p><strong>高层次的模块不应该依赖于低层次的模块，两者都应该依赖于抽象接口。</strong>台灯是高层次模块，电路是低层次模块，台灯依赖于台灯的插头而非电线以获取电源；电路依赖于插座为外部提供电源而非直接将电线暴露出去。</p>
+<p><strong>抽象接口不应该依赖于具体实现，而具体实现应该依赖于抽象接口</strong>。三针插头可以被台灯用，也可以被冰箱用，所以抽象接口（插头）并不依赖于背后的具体实现（台灯/冰箱）。而冰箱因为功率较大，一定要有能接地线的三针插头，所以具体实现依赖于抽象接口。</p>
+<p>在Python中，编译或程序启动时的依赖是import语句的内容，而运行时的依赖就是被调用的函数、方法等。</p>
+<p>也许你写出了类似下面的代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CarWashService</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, repository)</span>:</span></span><br><span class="line">        self.repository = repository</span><br><span class="line">        <span class="comment"># self.notifier = SmsNotifier()</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">enter_in_car_wash</span><span class="params">(self, car, customer)</span>:</span></span><br><span class="line">        job = CarWashJob(car, customer)</span><br><span class="line">        self.repository.put(job)</span><br><span class="line">        <span class="keyword">return</span> job</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wash_completed</span><span class="params">(self, service_id)</span>:</span></span><br><span class="line">        car_wash_job = self.repository.find_by_id(service_id)</span><br><span class="line">        SmsNotifier.send_sms(car_wash_job)    <span class="comment">#有问题</span></span><br><span class="line">        <span class="comment"># self.notifier.send_sms(car_wash_job)</span></span><br></pre></td></tr></table></figure></p>
+<p>这段代码的问题主要出在直接调用<code>SmsNotifier</code>类方法那行。如果你是按被注释的那两行写的，还是存在如下同样的问题。</p>
+<p><strong>问题一是全局状态问题</strong>，直接使用了全局变量<code>SmsNotifier</code>，我们说过写代码能使用局部变量的就别使用全局变量，一是全局变量不使用时并不会被释放内存，二是全局变量对其他对象来说都是可见的，也是可修改的，会给程序带来更多的不确定性。</p>
+<p><strong>问题二在于隐式依赖问题</strong>。并不能从<code>CarWashService</code>的构造方法或初始化方法中知道它依赖了<code>SmsNotifier</code>类，这对代码的可读性和易于理解性都会带来障碍。比如在别的模块中使用了<code>CarWashService</code>类的时候，不层层追查的话，神仙才知道它还依赖了<code>SmsNotifier</code>。</p>
+<p><strong>问题三是依赖于具体的实现</strong>。<code>CarWashService</code>对象直接依赖了具体的<code>send_sms</code>方法。这样做能够实现通知的需求，但是<strong>扩展性差</strong>。如果又要同时用电话、邮件、微信等通知方式，又该要来改这里的老代码了。从现实世界中的例子来看，在较大的机构中都会有类似“传达室”的小机构。要怎么改进就显而易见了。</p>
+<p>改进后的代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CarWashService</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, notifier, repository)</span>:</span></span><br><span class="line">        self.repository = repository</span><br><span class="line">        self.notifier = notifier</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">enter_in_car_wash</span><span class="params">(self, car, customer)</span>:</span></span><br><span class="line">        job = CarWashJob(car, customer)</span><br><span class="line">        self.repository.put(job)</span><br><span class="line">        <span class="keyword">return</span> job</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wash_completed</span><span class="params">(self, service_id)</span>:</span></span><br><span class="line">        car_wash_job = self.repository.find_by_id(service_id)</span><br><span class="line">        self.notifier.job_completed(car_wash_job)</span><br></pre></td></tr></table></figure></p>
+<p>上面通过<strong>依赖注入</strong>的方式将<code>notifier</code>对象作为初始化参数传递给<code>CarWashService</code>类。这种写法化解了上面提到的三种负面影响。</p>
+<p><strong>依赖注入是实现依赖反转的一种方式，两者并不等同。</strong>两个存在依赖关系的对象A、B，A使用B的服务，B可以向A提供服务，我们并不让A直接使用B，而是将B传递给A，使B成为A的一部分。这就是依赖注入。</p>
+<p>其实<strong>依赖反转</strong>也相当于应用了<strong>适配器模式</strong>，举例中的插座和插头是抽象接口，也就是台灯电线和供电电线的适配器，传达室也是消息发送人和消息接收人的适配器。示例代码中被抽象出来的notifier就是适配器对象。洗车服务只知道洗完车要通知，但是具体用哪些途径通知，当前结束的任务该通知给谁，在什么时间通知，都由<code>notifier</code>去完成。程序的耦合性会进一步降低，灵活性进一步增强。</p>
+<h2 id="开闭原则">开闭原则</h2><p>为何要遵循开闭原则？当你想增加自己的御寒能力只用在身体外加衣服而非做个开胸手术。软件体也一样，观察人体这个造物者的完美之作，把它的规律用在软件体上，就可以造出更完美的软件。<strong>好的设计可以让你在为系统新增功能时添加新代码即可而无需修改老代码。</strong></p>
+<p>洗车服务的数据需要得到保存，可能保存在内存、文件、数据库等等。但这些功能都是几乎一致的，所以你很可能写出了如下抽象类，希望其他子类都来继承它。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InterfaceJobReository</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, job)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_by_id</span><span class="params">(self, job_id)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_by_customer</span><span class="params">(self, customer)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryJobReository</span><span class="params">(InterfaceJobReository)</span>:</span></span><br><span class="line">	<span class="string">"""注意这里的继承"""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._storage = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, job)</span>:</span></span><br><span class="line">        self._storage[job.service_id] = job</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_by_id</span><span class="params">(self, job_id)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._storage.get(job_id)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_by_customer</span><span class="params">(self, customer)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> [job <span class="keyword">for</span> job <span class="keyword">in</span> self._storage.values()</span><br><span class="line">                <span class="keyword">if</span> job.has_customer(customer)]</span><br></pre></td></tr></table></figure></p>
+<p>以上写法这是符合开闭原则的，因为对于扩展成用文件保存时，只需要另外增加一个<code>InFileJobReository</code>类并写出相关实现就好了，并不会动任何一行已有代码。</p>
+<p><strong>秉承鸭子类型的理念，我们还可以简化代码，可以无需写那个抽象类</strong>。只需要让子类都继承Python的<code>object</code>类，例如<code>InMemoryJobReository(object)</code>， 剩下的一个字符都不用变，也能达到同样效果，但这似乎也留下了更多犯错误的可能，其中平衡点自行拿捏。</p>
+<h2 id="里氏替换原则">里氏替换原则</h2><p>为何要遵循这个原则？古猿作为基类，直立人是古猿的后代，现代人是直立人的后代，现代人可以代替直立人这是很自然的事情。这是自然法则和规律，为什么不可以应用到软件中来？如果你有一天看到个看起来像现代人，叫起来也像现代人，而她却需要充电，那她肯定是基于错误的基类生成出来的。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryJobReository</span><span class="params">(dict)</span>:</span></span><br><span class="line">	<span class="string">"""注意这里的继承"""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, job)</span>:</span></span><br><span class="line">        self[job.service_id] = job</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_by_id</span><span class="params">(self, job_id)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.get(job_id)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_by_customer</span><span class="params">(self, customer)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> [job <span class="keyword">for</span> job <span class="keyword">in</span> self.values()</span><br><span class="line">                <span class="keyword">if</span> job.has_customer(customer)]</span><br></pre></td></tr></table></figure></p>
+<p>原先是直接使用<code>dict</code>类的对象赋给<code>self._storage</code>，来完成工作。现在继承了<code>dict</code>类，相当于原来直接使用父类<code>dict</code>，而现在使用的是<code>dict</code>的子类。现在<code>InMemoryJobReository</code>的对象完全可以代替父类了。</p>
+<p>Python在接口实现时并不强制性继承。就算A和B是完全不相关的类，你还可以通过<code>abc</code>模块来将A类注册给B类，让A成为B的虚拟子类。如此强大灵活，比起东拼西凑，多多考虑如何提高到代码的重用率。</p>
+<h2 id="接口隔离原则">接口隔离原则</h2><p>为何要这么做？人嘴巴和鼻孔的功能应该不一样吧？否则的话，全人体只需要一个孔就行了（嘿~ 嘿~ 嘿~）。</p>
+<p>本节就没有代码了，因为示例只直接地讲了一个接口，不过我们在这过程中拆分了一些接口，不是吗？</p>
+<p>很多时候，根据这五条原则多多设计后再写代码，就能写出很好的代码了。这些基本原则在很多情况下也是相互促进，相互兼容，相互满足的。这过程中针对实际情况的不同你自己做的变通，也就相当于是运用了各类设计模式。比如在依赖反转一节中提到的适配器模式，控制反转模式等等。</p>
+
+        <div class="article-rights-info">
+          <li>
+            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
+          </li>
+          <li><strong>发表时间：</strong>2016-06-17 12:10:31</li>
+          <li><strong>最后更新：</strong>2016-06-17 18:12:52</li>
+          <li><strong>永久链接：</strong>http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html</li>
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html" data-id="cipjkuu1r0006v4hitjwd6w1y" class="article-share-link">分享</a>
+      
+        <a href="http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/27/Mesosphere-DCOS-Questions.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mesosphere DCOS 常见问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <a href="/" class="logo">阿驹</a>
+      &copy; 2016 阿驹<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'aju';
+  
+  var disqus_url = 'http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/jquery.scrollLoading.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
