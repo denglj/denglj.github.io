@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ajucs.com/2016/06/24/talk-about-time-and-timer.html</loc>
+    <lastmod>2016-06-24T11:19:17.850Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html</loc>
     <lastmod>2016-06-17T10:12:52.627Z</lastmod>
   </url>
@@ -42,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/about/index.html</loc>
+    <loc>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
@@ -77,7 +82,7 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
+    <loc>http://ajucs.com/about/index.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
