@@ -3,21 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>修复pip升级后pip与pip3命令均安装三方包至python3目录下 | 阿驹</title>
+  <title>Archives: 2016/8 | 阿驹</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="状况描述目前安装好较新的 Linux 发行版后，系统默认已经安装好了 python2 与 python3 。有时，也需要在这两种 python 环境下方便地安装python包。而根据 pip的安装文档 安装好了pip以后，默认情况下是安装在python2下面的（因为Linux默认的python版本是2）。
-然而我们再执行 python3 get-pip.py 来为 python3 装好pip后，我">
-<meta property="og:type" content="article">
-<meta property="og:title" content="修复pip升级后pip与pip3命令均安装三方包至python3目录下">
-<meta property="og:url" content="http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html">
+  <meta name="description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="阿驹">
+<meta property="og:url" content="http://ajucs.com/archives/2016/08/index.html">
 <meta property="og:site_name" content="阿驹">
-<meta property="og:description" content="状况描述目前安装好较新的 Linux 发行版后，系统默认已经安装好了 python2 与 python3 。有时，也需要在这两种 python 环境下方便地安装python包。而根据 pip的安装文档 安装好了pip以后，默认情况下是安装在python2下面的（因为Linux默认的python版本是2）。
-然而我们再执行 python3 get-pip.py 来为 python3 装好pip后，我">
-<meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
+<meta property="og:description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修复pip升级后pip与pip3命令均安装三方包至python3目录下">
-<meta name="twitter:description" content="状况描述目前安装好较新的 Linux 发行版后，系统默认已经安装好了 python2 与 python3 。有时，也需要在这两种 python 环境下方便地安装python包。而根据 pip的安装文档 安装好了pip以后，默认情况下是安装在python2下面的（因为Linux默认的python版本是2）。
-然而我们再执行 python3 get-pip.py 来为 python3 装好pip后，我">
+<meta name="twitter:title" content="阿驹">
+<meta name="twitter:description" content="阿驹的个人博客, 学习笔记, 生活感悟。关注Python, Nodejs, Web开发。爱生活，Geek范。">
   
     <link rel="alternative" href="/atom.xml" title="阿驹" type="application/atom+xml">
   
@@ -170,90 +166,39 @@ ga('send', 'pageview');
   
 </aside>
         
-        <section id="main"><article id="post-fix-pip-to-python2-after-upgrade-pip3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html" class="article-date">
-  <time datetime="2015-11-26T09:27:10.000Z" itemprop="datePublished">2015-11-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      修复pip升级后pip与pip3命令均安装三方包至python3目录下
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/08/15/unable-to-find-vcvarsall-bat.html" class="archive-article-date">
+  <time datetime="2016-08-15T21:09:40.000Z" itemprop="datePublished">8月 16</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/08/15/unable-to-find-vcvarsall-bat.html">Unable to find vcvarsall.bat</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="状况描述">状况描述</h2><p>目前安装好较新的 Linux 发行版后，系统默认已经安装好了 python2 与 python3 。有时，也需要在这两种 python 环境下方便地安装python包。而根据 <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="external">pip的安装文档</a> 安装好了pip以后，默认情况下是安装在python2下面的（因为Linux默认的python版本是2）。</p>
-<p>然而我们再执行 <code>python3 get-pip.py</code> 来为 python3 装好pip后，我们发现如下情况：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>pip -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python3</span>.4/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 3.4)</span></span><br><span class="line"><span class="variable">$ </span>pip3 -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python3</span>.4/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 3.4)</span></span><br><span class="line"><span class="variable">$ </span>pip2 -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python2</span>.7/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 2.7)</span></span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p><code>pip</code> 与 <code>pip3</code> 都是在 python3 目录下，那么执行 <code>pip install packagename</code> 和 <code>pip3 install packagename</code> 都会把 package 安装至 python3 的环境中去。</p>
-<h2 id="解决办法">解决办法</h2><p>使用如下命令重新安装一次pip：<br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">sudo</span> <span class="comment">pip2</span> <span class="comment">install</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">upgrade</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span><span class="literal">-</span><span class="comment">reinstall</span> <span class="comment">pip</span></span><br></pre></td></tr></table></figure></p>
-<p>结果如下：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>pip -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python2</span>.7/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 2.7)</span></span><br><span class="line"><span class="variable">$ </span>pip3 -<span class="constant">V</span></span><br><span class="line">pip <span class="number">7.1</span>.<span class="number">2</span> from /usr/local/<span class="class"><span class="keyword">lib</span>/<span class="title">python3</span>.4/<span class="title">dist</span>-<span class="title">packages</span> (<span class="title">python</span> 3.4)</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="开始就该更轻松">开始就该更轻松</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="built_in">get</span> install <span class="keyword">python3</span>-pip</span><br><span class="line">$ sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-pip</span><br></pre></td></tr></table></figure>
-<p>按照以上命令安装好pip以后，自然应该是pip对应在python2目录下，pip3对应在python3下的。注意先安装3的，后安装2的，因为这种方式安装pip的时候，后安装的都会将先安装的 <code>pip</code> 覆盖掉。不过这种方式安装的pip不一定是最新稳定版本的。需要自己再更新。如果不慎更新除了问题，参考上面的解决方式。</p>
-<h2 id="最轻松的方式">最轻松的方式</h2><p>请一开始就使用 <code>pyenv</code> 和 <code>virtualenv</code> 工具来为不同的项目生成不同的python版本及相互隔离的虚拟环境。这样每个项目的python版本及其依赖的第三方包都不相关联。</p>
-<p>参考<a href="http://www.cnblogs.com/npumenglei/p/3719412.html" target="_blank" rel="external">用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境</a></p>
-
-        <div class="article-rights-info">
-          <li>
-            <strong>版权声明：</strong>自由转载-保留署名-禁止商用-禁止演绎(<a target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW">知识共享4.0许可协议</a>)
-          </li>
-          <li><strong>发表时间：</strong>2015-11-26 17:27:10</li>
-          <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
-          <li><strong>永久链接：</strong>http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html</li>
-        </div>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html" data-id="cirww2xbl00140ahi45a7ov9v" class="article-share-link">分享</a>
-      
-        <a href="http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html#disqus_thread" class="article-comment-link">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/12/03/implemention-of-encrypt-download-links.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Python web 加密下载链接的实现
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/11/11/git-merge-multiple-commits.html" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">git合并多个提交commits</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-
+  
+  
+    </div></section>
+  
 </section>
       </div>
       <footer id="footer">
@@ -271,13 +216,11 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'aju';
   
-  var disqus_url = 'http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html';
-  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>

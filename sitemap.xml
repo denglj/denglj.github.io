@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ajucs.com/2016/08/15/unable-to-find-vcvarsall-bat.html</loc>
+    <lastmod>2016-08-16T03:14:38.790Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ajucs.com/2016/06/24/talk-about-time-and-timer.html</loc>
     <lastmod>2016-06-24T11:22:58.202Z</lastmod>
   </url>
@@ -19,11 +24,6 @@
   <url>
     <loc>http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html</loc>
     <lastmod>2016-04-20T07:40:35.912Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ajucs.com/2016/01/22/python-memoization.html</loc>
-    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
   <url>
@@ -83,6 +83,11 @@
   
   <url>
     <loc>http://ajucs.com/about/index.html</loc>
+    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ajucs.com/2016/01/22/python-memoization.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   

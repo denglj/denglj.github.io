@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我和你们一样, 我和你们不一样。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ajucs.com/"/>
-  <updated>2016-06-24T11:22:58.202Z</updated>
+  <updated>2016-08-16T03:14:38.790Z</updated>
   <id>http://ajucs.com/</id>
   
   <author>
@@ -13,6 +13,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Unable to find vcvarsall.bat]]></title>
+    <link href="http://ajucs.com/2016/08/15/unable-to-find-vcvarsall-bat.html"/>
+    <id>http://ajucs.com/2016/08/15/unable-to-find-vcvarsall-bat.html</id>
+    <published>2016-08-15T21:09:40.000Z</published>
+    <updated>2016-08-16T03:14:38.790Z</updated>
+    <content type="html"><![CDATA[<h2 id="1-_什么是_vcvarsall-bat_？">1. 什么是 vcvarsall.bat ？</h2><p>Visual Studio 的编译器的一个组件。</p>
+<h2 id="2-_使用Python开发环境，何时需要它？">2. 使用Python开发环境，何时需要它？</h2><p>在Windows环境下，使用了lxml、mysqlclient、pillow等第三方库，这些第三方库的一些子模块是用C语言扩展写的。而在安装这些库时试图通过源码安装，需要编译，如果当前系统下没有对应的编译环境，则会报错，这里是报“无法找到vcvarsall.bat”。<br><a id="more"></a></p>
+<h2 id="3-_如何克服没有_vcvarsall-bat_带来的问题？">3. 如何克服没有 vcvarsall.bat 带来的问题？</h2><h3 id="1)_使用已编译的包">1) 使用已编译的包</h3><p>推荐下载whl格式的包然后通过 <code>pip install path_to_package.whl</code> 命令来安装，如此安装的包还可以被pip管理起来，卸载也方便。可以去这里找编译好的whl包：<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="external">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<h3 id="2)_通过源码编译安装">2) 通过源码编译安装</h3><p>找不到现成已编译的whl包的情况下，只能通过源码安装。要查清楚各版本Python对应的VC编译环境。可在此处查看Python官方文档的描述：<a href="https://packaging.python.org/extensions/#building-binary-extensions" target="_blank" rel="external">https://packaging.python.org/extensions/#building-binary-extensions</a></p>
+<p>也可按照下方提示直接安装相关工具后再编译安装所需的Python包。</p>
+<ul>
+<li>Python2.6 ~ 3.2: <a href="https://www.microsoft.com/download/details.aspx?id=44266" target="_blank" rel="external">Microsoft Visual C++ Compiler for Python 2.7</a></li>
+<li>Python3.3 ~ 3.4: <a href="https://www.microsoft.com/download/details.aspx?id=8279" target="_blank" rel="external">Windows SDK for Windows 7 and .NET 4.0</a></li>
+<li>Python3.5 ~ ?? : <a href="http://go.microsoft.com/fwlink/?LinkId=691126" target="_blank" rel="external">Visual C++ Build Tools 2015</a></li>
+</ul>
+<p>根据以上提示安装好相应版本的工具即可，是无需安装 Visual Studio 完整套件的。一个更好的解决办法是，使用 <strong>Linux</strong> 吧 :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="1-_什么是_vcvarsall-bat_？">1. 什么是 vcvarsall.bat ？</h2><p>Visual Studio 的编译器的一个组件。</p>
+<h2 id="2-_使用Python开发环境，何时需要它？">2. 使用Python开发环境，何时需要它？</h2><p>在Windows环境下，使用了lxml、mysqlclient、pillow等第三方库，这些第三方库的一些子模块是用C语言扩展写的。而在安装这些库时试图通过源码安装，需要编译，如果当前系统下没有对应的编译环境，则会报错，这里是报“无法找到vcvarsall.bat”。<br>]]>
+    
+    </summary>
+    
+      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+    
+      <category term="Python on Windows" scheme="http://ajucs.com/tags/Python-on-Windows/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[UTC+8还是GMT+8?聊聊时间与计时法]]></title>
