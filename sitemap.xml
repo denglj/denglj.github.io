@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ajucs.com/2016/08/30/what-is-cloud-compute.html</loc>
+    <lastmod>2016-08-30T08:38:20.563Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ajucs.com/2016/08/15/unable-to-find-vcvarsall-bat.html</loc>
     <lastmod>2016-08-16T03:14:38.790Z</lastmod>
   </url>
@@ -27,6 +32,11 @@
   </url>
   
   <url>
+    <loc>http://ajucs.com/2016/01/22/python-memoization.html</loc>
+    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ajucs.com/2015/10/29/python-is-compiler-or-interpreter.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
@@ -42,12 +52,12 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/2015/11/11/git-merge-multiple-commits.html</loc>
+    <loc>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
   <url>
-    <loc>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
+    <loc>http://ajucs.com/2015/12/21/getting-started-with-python-books.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
@@ -87,12 +97,7 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/2016/01/22/python-memoization.html</loc>
-    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ajucs.com/2015/12/21/getting-started-with-python-books.html</loc>
+    <loc>http://ajucs.com/2015/11/11/git-merge-multiple-commits.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
