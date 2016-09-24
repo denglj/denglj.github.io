@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ajucs.com/2016/09/20/blocking-nonblocking-sync-async.html</loc>
+    <lastmod>2016-09-24T10:14:17.998Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ajucs.com/2016/08/30/what-is-cloud-compute.html</loc>
     <lastmod>2016-09-01T02:27:40.189Z</lastmod>
   </url>
@@ -29,11 +34,6 @@
   <url>
     <loc>http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html</loc>
     <lastmod>2016-04-20T07:40:35.912Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ajucs.com/2016/01/22/python-memoization.html</loc>
-    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
   <url>
@@ -72,6 +72,11 @@
   </url>
   
   <url>
+    <loc>http://ajucs.com/about/index.html</loc>
+    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ajucs.com/2015/09/28/addons-in-third-part-wechat-platform.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
@@ -92,7 +97,7 @@
   </url>
   
   <url>
-    <loc>http://ajucs.com/about/index.html</loc>
+    <loc>http://ajucs.com/2016/01/22/python-memoization.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
