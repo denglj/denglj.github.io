@@ -3,9 +3,9 @@
   <title><![CDATA[阿驹]]></title>
   <subtitle><![CDATA[我和你们一样, 我和你们不一样。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://ajucs.com/"/>
+  <link href="http://aju.space/"/>
   <updated>2016-09-24T10:14:17.998Z</updated>
-  <id>http://ajucs.com/</id>
+  <id>http://aju.space/</id>
   
   <author>
     <name><![CDATA[阿驹]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[阻塞、非阻塞、同步、异步]]></title>
-    <link href="http://ajucs.com/2016/09/20/blocking-nonblocking-sync-async.html"/>
-    <id>http://ajucs.com/2016/09/20/blocking-nonblocking-sync-async.html</id>
+    <link href="http://aju.space/2016/09/20/blocking-nonblocking-sync-async.html"/>
+    <id>http://aju.space/2016/09/20/blocking-nonblocking-sync-async.html</id>
     <published>2016-09-20T04:07:39.000Z</published>
     <updated>2016-09-24T10:14:17.998Z</updated>
     <content type="html"><![CDATA[<p>几个经常容易混淆的概念。特别是像异步与非阻塞，在某些情况下这两个术语常常混用。下面就我谈谈自己对这四个概念的理解，也解释了异步与非阻塞这两个词为何会形影不离。希望对这些概念迷惑，学习Python协程、并发相关的朋友有所帮助。</p>
@@ -52,18 +52,18 @@
     
     </summary>
     
-      <category term="并发" scheme="http://ajucs.com/tags/%E5%B9%B6%E5%8F%91/"/>
+      <category term="并发" scheme="http://aju.space/tags/%E5%B9%B6%E5%8F%91/"/>
     
-      <category term="异步" scheme="http://ajucs.com/tags/%E5%BC%82%E6%AD%A5/"/>
+      <category term="异步" scheme="http://aju.space/tags/%E5%BC%82%E6%AD%A5/"/>
     
-      <category term="非阻塞" scheme="http://ajucs.com/tags/%E9%9D%9E%E9%98%BB%E5%A1%9E/"/>
+      <category term="非阻塞" scheme="http://aju.space/tags/%E9%9D%9E%E9%98%BB%E5%A1%9E/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[什么是云计算]]></title>
-    <link href="http://ajucs.com/2016/08/30/what-is-cloud-compute.html"/>
-    <id>http://ajucs.com/2016/08/30/what-is-cloud-compute.html</id>
+    <link href="http://aju.space/2016/08/30/what-is-cloud-compute.html"/>
+    <id>http://aju.space/2016/08/30/what-is-cloud-compute.html</id>
     <published>2016-08-30T02:36:29.000Z</published>
     <updated>2016-09-01T02:27:40.189Z</updated>
     <content type="html"><![CDATA[<p>美国国家标准技术研究所（NIST）对云计算给的基本定义如下。</p>
@@ -106,14 +106,14 @@
     
     </summary>
     
-      <category term="云计算" scheme="http://ajucs.com/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+      <category term="云计算" scheme="http://aju.space/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Unable to find vcvarsall.bat]]></title>
-    <link href="http://ajucs.com/2016/08/15/unable-to-find-vcvarsall-bat.html"/>
-    <id>http://ajucs.com/2016/08/15/unable-to-find-vcvarsall-bat.html</id>
+    <link href="http://aju.space/2016/08/15/unable-to-find-vcvarsall-bat.html"/>
+    <id>http://aju.space/2016/08/15/unable-to-find-vcvarsall-bat.html</id>
     <published>2016-08-15T21:09:40.000Z</published>
     <updated>2016-08-16T03:14:38.790Z</updated>
     <content type="html"><![CDATA[<h2 id="1-_什么是_vcvarsall-bat_？">1. 什么是 vcvarsall.bat ？</h2><p>Visual Studio 的编译器的一个组件。</p>
@@ -134,16 +134,16 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
-      <category term="Python on Windows" scheme="http://ajucs.com/tags/Python-on-Windows/"/>
+      <category term="Python on Windows" scheme="http://aju.space/tags/Python-on-Windows/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[UTC+8还是GMT+8?聊聊时间与计时法]]></title>
-    <link href="http://ajucs.com/2016/06/24/talk-about-time-and-timer.html"/>
-    <id>http://ajucs.com/2016/06/24/talk-about-time-and-timer.html</id>
+    <link href="http://aju.space/2016/06/24/talk-about-time-and-timer.html"/>
+    <id>http://aju.space/2016/06/24/talk-about-time-and-timer.html</id>
     <published>2016-06-24T05:17:14.000Z</published>
     <updated>2016-06-24T11:22:58.202Z</updated>
     <content type="html"><![CDATA[<p>今天一位同事问道：“你写入ES的时间字段是考虑过时区处理了的吗？”</p>
@@ -204,14 +204,14 @@
     
     </summary>
     
-      <category term="-杂谈" scheme="http://ajucs.com/tags/%E6%9D%82%E8%B0%88/"/>
+      <category term="-杂谈" scheme="http://aju.space/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[如何在Python里应用SOLID原则]]></title>
-    <link href="http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html"/>
-    <id>http://ajucs.com/2016/06/17/use-S-O-L-I-D-in-python.html</id>
+    <link href="http://aju.space/2016/06/17/use-S-O-L-I-D-in-python.html"/>
+    <id>http://aju.space/2016/06/17/use-S-O-L-I-D-in-python.html</id>
     <published>2016-06-17T04:10:31.000Z</published>
     <updated>2016-06-17T10:12:52.627Z</updated>
     <content type="html"><![CDATA[<p>如今OOP编程大行其道。不少人以为用编程语言里的class关键字定义一个类，然后用类创建一个对象就是OOP了。肤浅！</p>
@@ -299,16 +299,16 @@
     
     </summary>
     
-      <category term="OOP" scheme="http://ajucs.com/tags/OOP/"/>
+      <category term="OOP" scheme="http://aju.space/tags/OOP/"/>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Mesosphere DCOS 常见问题]]></title>
-    <link href="http://ajucs.com/2016/04/27/Mesosphere-DCOS-Questions.html"/>
-    <id>http://ajucs.com/2016/04/27/Mesosphere-DCOS-Questions.html</id>
+    <link href="http://aju.space/2016/04/27/Mesosphere-DCOS-Questions.html"/>
+    <id>http://aju.space/2016/04/27/Mesosphere-DCOS-Questions.html</id>
     <published>2016-04-27T21:20:01.000Z</published>
     <updated>2016-04-28T03:25:24.242Z</updated>
     <content type="html"><![CDATA[<p>本文摘自Mesosphere 官网，可以从这些常见问题中明确Mesosphere DOCS的定位以及作用。并可一瞥其架构。<br><a id="more"></a></p>
@@ -327,18 +327,18 @@
     
     </summary>
     
-      <category term="DCOS" scheme="http://ajucs.com/tags/DCOS/"/>
+      <category term="DCOS" scheme="http://aju.space/tags/DCOS/"/>
     
-      <category term="Mesos" scheme="http://ajucs.com/tags/Mesos/"/>
+      <category term="Mesos" scheme="http://aju.space/tags/Mesos/"/>
     
-      <category term="cloud" scheme="http://ajucs.com/tags/cloud/"/>
+      <category term="cloud" scheme="http://aju.space/tags/cloud/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[管理多个SSH Key以支持多个Git账号]]></title>
-    <link href="http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html"/>
-    <id>http://ajucs.com/2016/04/20/use-multi-ssh-key-for-git.html</id>
+    <link href="http://aju.space/2016/04/20/use-multi-ssh-key-for-git.html"/>
+    <id>http://aju.space/2016/04/20/use-multi-ssh-key-for-git.html</id>
     <published>2016-04-20T01:30:02.000Z</published>
     <updated>2016-04-20T07:40:35.912Z</updated>
     <content type="html"><![CDATA[<p>SSH Key 可以方便地解决系统登录的问题，不用每次提交代码时输入相关Git平台的登录密码。</p>
@@ -393,16 +393,16 @@
     
     </summary>
     
-      <category term="git" scheme="http://ajucs.com/tags/git/"/>
+      <category term="git" scheme="http://aju.space/tags/git/"/>
     
-      <category term="ssh" scheme="http://ajucs.com/tags/ssh/"/>
+      <category term="ssh" scheme="http://aju.space/tags/ssh/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python性能优化之记忆化（Memoization）]]></title>
-    <link href="http://ajucs.com/2016/01/22/python-memoization.html"/>
-    <id>http://ajucs.com/2016/01/22/python-memoization.html</id>
+    <link href="http://aju.space/2016/01/22/python-memoization.html"/>
+    <id>http://aju.space/2016/01/22/python-memoization.html</id>
     <published>2016-01-22T06:43:16.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<h2 id="记忆化（Memoization）介绍">记忆化（Memoization）介绍</h2><p>简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。<br><strong>有一个限制条件是该函数必须是纯函数式的</strong>，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，<code>square(3)</code> 的结果永远是<code>9</code>，所以我们才能把它的结果存储起来，下次需要知道<code>3</code>的平方的结果时，无需计算，直接从内存中读取就好了。<br><a id="more"></a><br>而那些依赖于可变的参数的函数，则不可使用这种方式进行加速。比如获取系统当前登录用户数量的函数，也许参数都是固定的，但返回值却是可变的，这是由系统中即时登录的用户数量决定的，缓存起来就没意义了。</p>
@@ -412,23 +412,23 @@
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"></span><br><span class="line"><span class="decorator">@lru_cache(maxsize=32)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pep</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="string">'Retrieve text of a Python Enhancement Proposal'</span></span><br><span class="line">    resource = <span class="string">'http://www.python.org/dev/peps/pep-%04d/'</span> % num</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> urllib.request.urlopen(resource) <span class="keyword">as</span> s:</span><br><span class="line">            <span class="keyword">return</span> s.read()</span><br><span class="line">    <span class="keyword">except</span> urllib.error.HTTPError:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Not Found'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> n <span class="keyword">in</span> <span class="number">8</span>, <span class="number">290</span>, <span class="number">308</span>, <span class="number">320</span>, <span class="number">8</span>, <span class="number">218</span>, <span class="number">320</span>, <span class="number">279</span>, <span class="number">289</span>, <span class="number">320</span>, <span class="number">9991</span>:</span><br><span class="line"><span class="prompt">... </span>    pep = get_pep(n)</span><br><span class="line"><span class="prompt">... </span>    print(n, len(pep))</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>get_pep.cache_info()</span><br><span class="line">CacheInfo(hits=<span class="number">3</span>, misses=<span class="number">8</span>, maxsize=<span class="number">32</span>, currsize=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
 <p><code>lru_cache</code>装饰器是Python3.2新增的，Python3.3新增了<code>typed</code>可选参数。</p>
 <h2 id="Python2的实现">Python2的实现</h2><p>Python2中没有<code>lru_cache</code>装饰器，但是我们可以自己实现，非常简单，如下：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">_CACHE_VALUES = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">memoized</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> _CACHE_VALUES.get(x, func(x))</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="decorator">@memoized</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addtwo</span><span class="params">(x)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> x+<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p>但我们上面这种写法太简单了，连缓存命中率这些统计都没有，而且也不通用。但明白了基本原理，我们要扩展也就不难了。更加复杂的装饰器实现可以参考<a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html">《深入浅出Python装饰器》</a>。<br>更偷懒一点，你可以把Python源码中的lru_cahce函数相关代码拷贝到项目中，<a href="https://github.com/python/cpython/blob/77a475ebaa65aa5a85287cbe782c552039c9f507/Lib/functools.py#L391" target="_blank" rel="external">参考这里</a>。</p>
+<p>但我们上面这种写法太简单了，连缓存命中率这些统计都没有，而且也不通用。但明白了基本原理，我们要扩展也就不难了。更加复杂的装饰器实现可以参考<a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html" target="_blank" rel="external">《深入浅出Python装饰器》</a>。<br>更偷懒一点，你可以把Python源码中的lru_cahce函数相关代码拷贝到项目中，<a href="https://github.com/python/cpython/blob/77a475ebaa65aa5a85287cbe782c552039c9f507/Lib/functools.py#L391" target="_blank" rel="external">参考这里</a>。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="记忆化（Memoization）介绍">记忆化（Memoization）介绍</h2><p>简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。<br><strong>有一个限制条件是该函数必须是纯函数式的</strong>，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，<code>square(3)</code> 的结果永远是<code>9</code>，所以我们才能把它的结果存储起来，下次需要知道<code>3</code>的平方的结果时，无需计算，直接从内存中读取就好了。<br>]]>
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
-      <category term="性能优化" scheme="http://ajucs.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+      <category term="性能优化" scheme="http://aju.space/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[深入浅出Python装饰器]]></title>
-    <link href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html"/>
-    <id>http://ajucs.com/2016/01/14/dive-into-python-decorator.html</id>
+    <link href="http://aju.space/2016/01/14/dive-into-python-decorator.html"/>
+    <id>http://aju.space/2016/01/14/dive-into-python-decorator.html</id>
     <published>2016-01-14T05:52:34.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<p>有朋友说看到《Python CookBook》的装饰器部分有些迷糊，究其原因是没有清晰地理解Python装饰器是什么，能干什么。于是有了本文。看此文时，从头到尾跟着思路走，应该会对Python装饰器有更明白深刻的认识。新手不要跳读，新手不要跳读，新手不要跳读。<br>本文假定你已经明白了Python中什么叫做函数，变量的作用域、解析规则及生存周期。阿驹还是简单阐述一下：</p>
@@ -468,14 +468,14 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python入门、基础书籍简评与推荐]]></title>
-    <link href="http://ajucs.com/2015/12/21/getting-started-with-python-books.html"/>
-    <id>http://ajucs.com/2015/12/21/getting-started-with-python-books.html</id>
+    <link href="http://aju.space/2015/12/21/getting-started-with-python-books.html"/>
+    <id>http://aju.space/2015/12/21/getting-started-with-python-books.html</id>
     <published>2015-12-21T06:33:34.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<p>本文对Python网友讨论较多的几本基础入门书籍做个简评，给新手朋友们一个参考。本文仅代表阿驹的个人对它们的意见，不一定完全正确，但站在阿驹的角度看来，是很中肯的。</p>
@@ -566,14 +566,14 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[简单明了地选择Python GUI库]]></title>
-    <link href="http://ajucs.com/2015/12/08/how-to-choose-python-GUI-toolkit-library.html"/>
-    <id>http://ajucs.com/2015/12/08/how-to-choose-python-GUI-toolkit-library.html</id>
+    <link href="http://aju.space/2015/12/08/how-to-choose-python-GUI-toolkit-library.html"/>
+    <id>http://aju.space/2015/12/08/how-to-choose-python-GUI-toolkit-library.html</id>
     <published>2015-12-08T08:40:50.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<p>可用于Python GUI程序开发，优秀且更新“跟得上时代”的库有 <strong>wxPython</strong> 、<strong>PyQT</strong>(PySide)、<strong>Kivy</strong>  、<strong>Libavg</strong> ，当然还有 Python 内置的 <strong>Tkinter</strong> 。像 PyGUI 、PyGTK 、PySWT 等，由于上次更新距现在太为久远且文档、学习资料、稳定性等诸多考虑，阿驹认为它们并不适合于开发一个正式的项目，就不作介绍。</p>
@@ -645,22 +645,22 @@
     
     </summary>
     
-      <category term="GUI" scheme="http://ajucs.com/tags/GUI/"/>
+      <category term="GUI" scheme="http://aju.space/tags/GUI/"/>
     
-      <category term="Kivy" scheme="http://ajucs.com/tags/Kivy/"/>
+      <category term="Kivy" scheme="http://aju.space/tags/Kivy/"/>
     
-      <category term="PyQT" scheme="http://ajucs.com/tags/PyQT/"/>
+      <category term="PyQT" scheme="http://aju.space/tags/PyQT/"/>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
-      <category term="wxPython" scheme="http://ajucs.com/tags/wxPython/"/>
+      <category term="wxPython" scheme="http://aju.space/tags/wxPython/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python web 加密下载链接的实现]]></title>
-    <link href="http://ajucs.com/2015/12/03/implemention-of-encrypt-download-links.html"/>
-    <id>http://ajucs.com/2015/12/03/implemention-of-encrypt-download-links.html</id>
+    <link href="http://aju.space/2015/12/03/implemention-of-encrypt-download-links.html"/>
+    <id>http://aju.space/2015/12/03/implemention-of-encrypt-download-links.html</id>
     <published>2015-12-03T10:22:28.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<h2 id="需求背景">需求背景</h2><p>文件上传下载绝对是Web攻防中一个重要的突破口。网络安全日益受重视的今天，web开发中除了要对文件上传进行严格的权限控制，文件下载亦是如此。不可随意暴露服务器端信息，以及用户信息。<br>其他技术栈的网站也可以作参考。</p>
@@ -717,16 +717,16 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
-      <category term="Web" scheme="http://ajucs.com/tags/Web/"/>
+      <category term="Web" scheme="http://aju.space/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[修复pip升级后pip与pip3命令均安装三方包至python3目录下]]></title>
-    <link href="http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html"/>
-    <id>http://ajucs.com/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html</id>
+    <link href="http://aju.space/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html"/>
+    <id>http://aju.space/2015/11/26/fix-pip-to-python2-after-upgrade-pip3.html</id>
     <published>2015-11-26T09:27:10.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<h2 id="状况描述">状况描述</h2><p>目前安装好较新的 Linux 发行版后，系统默认已经安装好了 python2 与 python3 。有时，也需要在这两种 python 环境下方便地安装python包。而根据 <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="external">pip的安装文档</a> 安装好了pip以后，默认情况下是安装在python2下面的（因为Linux默认的python版本是2）。</p>
@@ -746,16 +746,16 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://ajucs.com/tags/Linux/"/>
+      <category term="Linux" scheme="http://aju.space/tags/Linux/"/>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[git合并多个提交commits]]></title>
-    <link href="http://ajucs.com/2015/11/11/git-merge-multiple-commits.html"/>
-    <id>http://ajucs.com/2015/11/11/git-merge-multiple-commits.html</id>
+    <link href="http://aju.space/2015/11/11/git-merge-multiple-commits.html"/>
+    <id>http://aju.space/2015/11/11/git-merge-multiple-commits.html</id>
     <published>2015-11-11T08:18:35.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<p>阿驹的工作和个人项目都使用Git作为版本控制工具。与Subversion相比，Git更具Geek范，熟练之后感觉灵活强大。</p>
@@ -778,14 +778,14 @@
     
     </summary>
     
-      <category term="git" scheme="http://ajucs.com/tags/git/"/>
+      <category term="git" scheme="http://aju.space/tags/git/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[字符编码及Python中文处理精解]]></title>
-    <link href="http://ajucs.com/2015/11/10/Python-character-encoding-explained.html"/>
-    <id>http://ajucs.com/2015/11/10/Python-character-encoding-explained.html</id>
+    <link href="http://aju.space/2015/11/10/Python-character-encoding-explained.html"/>
+    <id>http://aju.space/2015/11/10/Python-character-encoding-explained.html</id>
     <published>2015-11-10T10:33:09.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<h2 id="本文目的">本文目的</h2><p>为 Python 程序员简练地介绍字符编码相关支持，彻底解疑“ Python 中文乱码”，“ Python 2与 Python 3 字符编码差异”等相关问题。使用其他语言的程序员可作参考，道理都是相通的，不过具体处理方式不同罢了。</p>
@@ -922,16 +922,16 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
-      <category term="字符编码" scheme="http://ajucs.com/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"/>
+      <category term="字符编码" scheme="http://aju.space/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python是编译型还是解释型语言？与Java有何不同？]]></title>
-    <link href="http://ajucs.com/2015/10/29/python-is-compiler-or-interpreter.html"/>
-    <id>http://ajucs.com/2015/10/29/python-is-compiler-or-interpreter.html</id>
+    <link href="http://aju.space/2015/10/29/python-is-compiler-or-interpreter.html"/>
+    <id>http://aju.space/2015/10/29/python-is-compiler-or-interpreter.html</id>
     <published>2015-10-29T05:57:40.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<p>前段时间有几个人在群里争论Java和Python是编译型还是解释型语言。阿驹在这里谈谈自己的看法。<br>毕竟作为曾经的Java程序员，猿！</p>
@@ -954,14 +954,14 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python编码最佳之最佳实践]]></title>
-    <link href="http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html"/>
-    <id>http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html</id>
+    <link href="http://aju.space/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html"/>
+    <id>http://aju.space/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html</id>
     <published>2015-10-09T03:30:00.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<hr>
@@ -1118,14 +1118,14 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[附加应用接入微信第三方平台解决方案]]></title>
-    <link href="http://ajucs.com/2015/09/28/addons-in-third-part-wechat-platform.html"/>
-    <id>http://ajucs.com/2015/09/28/addons-in-third-part-wechat-platform.html</id>
+    <link href="http://aju.space/2015/09/28/addons-in-third-part-wechat-platform.html"/>
+    <id>http://aju.space/2015/09/28/addons-in-third-part-wechat-platform.html</id>
     <published>2015-09-28T08:01:46.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<hr>
@@ -1217,16 +1217,16 @@
     
     </summary>
     
-      <category term="wechat" scheme="http://ajucs.com/tags/wechat/"/>
+      <category term="wechat" scheme="http://aju.space/tags/wechat/"/>
     
-      <category term="微信开发" scheme="http://ajucs.com/tags/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91/"/>
+      <category term="微信开发" scheme="http://aju.space/tags/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Python函数内import和模块顶部import的区别]]></title>
-    <link href="http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html"/>
-    <id>http://ajucs.com/2014/11/26/the-difference-between-module-import-and-function-import.html</id>
+    <link href="http://aju.space/2014/11/26/the-difference-between-module-import-and-function-import.html"/>
+    <id>http://aju.space/2014/11/26/the-difference-between-module-import-and-function-import.html</id>
     <published>2014-11-26T02:20:26.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<h2 id="模块顶部import">模块顶部import</h2><ul>
@@ -1255,7 +1255,7 @@
 </li>
 </ul>
 <h2 id="总结">总结</h2><p>应该使用模块顶部导入的方式，除非一定要使用函数内部导入的方式才能完成工作。</p>
-<h2 id="import_相关最佳实践">import 相关最佳实践</h2><p>参考<a href="http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html">Python编码最佳之最佳实践</a></p>
+<h2 id="import_相关最佳实践">import 相关最佳实践</h2><p>参考<a href="http://ajucs.com/2015/10/09/The-Best-of-the-Best-Practices-Guide-for-Python.html" target="_blank" rel="external">Python编码最佳之最佳实践</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="模块顶部import">模块顶部import</h2><ul>
@@ -1273,14 +1273,14 @@
     
     </summary>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[MacOSX10.9.4下安装PIL库失败的解决方法]]></title>
-    <link href="http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html"/>
-    <id>http://ajucs.com/2014/07/11/OSX-install-PIL-library-failure-solution.html</id>
+    <link href="http://aju.space/2014/07/11/OSX-install-PIL-library-failure-solution.html"/>
+    <id>http://aju.space/2014/07/11/OSX-install-PIL-library-failure-solution.html</id>
     <published>2014-07-11T02:59:59.000Z</published>
     <updated>2016-04-20T06:00:22.894Z</updated>
     <content type="html"><![CDATA[<h2 id="安装PIL库">安装PIL库</h2><p>在Mavericks10.9下安装PIL库失败，这是一个python的图形处理库。错误提示如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jus-iMac:~ ju$ sudo pip <span class="operator"><span class="keyword">install</span> PIL</span><br><span class="line"><span class="keyword">Password</span>:</span><br><span class="line">Downloading/unpacking PIL</span><br><span class="line">  Could <span class="keyword">not</span> find <span class="keyword">any</span> downloads that satisfy the requirement PIL</span><br><span class="line">    <span class="keyword">Some</span> <span class="keyword">externally</span> hosted files were ignored (<span class="keyword">use</span> <span class="comment">--allow-external PIL to allow).</span></span><br><span class="line">Cleaning up...</span><br><span class="line"><span class="keyword">No</span> distributions <span class="keyword">at</span> all <span class="keyword">found</span> <span class="keyword">for</span> PIL</span><br><span class="line">Storing debug <span class="keyword">log</span> <span class="keyword">for</span> <span class="keyword">failure</span> <span class="keyword">in</span> /<span class="keyword">Users</span>/ju/<span class="keyword">Library</span>/<span class="keyword">Logs</span>/pip.<span class="keyword">log</span></span></span><br></pre></td></tr></table></figure></p>
@@ -1295,11 +1295,11 @@
     
     </summary>
     
-      <category term="PIL" scheme="http://ajucs.com/tags/PIL/"/>
+      <category term="PIL" scheme="http://aju.space/tags/PIL/"/>
     
-      <category term="Pillow" scheme="http://ajucs.com/tags/Pillow/"/>
+      <category term="Pillow" scheme="http://aju.space/tags/Pillow/"/>
     
-      <category term="Python" scheme="http://ajucs.com/tags/Python/"/>
+      <category term="Python" scheme="http://aju.space/tags/Python/"/>
     
   </entry>
   

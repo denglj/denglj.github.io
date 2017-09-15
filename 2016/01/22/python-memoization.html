@@ -8,7 +8,7 @@
   <meta name="description" content="记忆化（Memoization）介绍简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。有一个限制条件是该函数必须是纯函数式的，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，square(3) 的结果永远是9，所以我们才能把它的结果存储起来，下次需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python性能优化之记忆化（Memoization）">
-<meta property="og:url" content="http://ajucs.com/2016/01/22/python-memoization.html">
+<meta property="og:url" content="http://aju.space/2016/01/22/python-memoization.html">
 <meta property="og:site_name" content="阿驹">
 <meta property="og:description" content="记忆化（Memoization）介绍简单说来 Memoization 是一种利用缓存来加速函数调用的技术手段，将消耗较大的调用结果存储起来，当再次遇到相同调用时就从缓存读取结果而无需重新计算。有一个限制条件是该函数必须是纯函数式的，相当于函数式编程中的不可变性，即输入一致时输出一定不会改变。比如计算平方的函数就满足这种条件，square(3) 的结果永远是9，所以我们才能把它的结果存储起来，下次需">
 <meta property="og:updated_time" content="2016-04-20T06:00:22.894Z">
@@ -62,7 +62,7 @@ ga('send', 'pageview');
       </nav>
       <nav id="sub-nav">
         <div id="search-form-wrap">
-          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://aju.space"></form>
         </div>
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
         
@@ -84,7 +84,7 @@ ga('send', 'pageview');
     <a href="/about/index.html" class="mobile-nav-link">About</a>
   
   <div id="search-form-wrap-mobile">
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajucs.com"></form>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://aju.space"></form>
   </div>
 </nav>
       <div class="outer">
@@ -197,7 +197,7 @@ ga('send', 'pageview');
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> lru_cache</span><br><span class="line"></span><br><span class="line"><span class="decorator">@lru_cache(maxsize=32)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pep</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="string">'Retrieve text of a Python Enhancement Proposal'</span></span><br><span class="line">    resource = <span class="string">'http://www.python.org/dev/peps/pep-%04d/'</span> % num</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> urllib.request.urlopen(resource) <span class="keyword">as</span> s:</span><br><span class="line">            <span class="keyword">return</span> s.read()</span><br><span class="line">    <span class="keyword">except</span> urllib.error.HTTPError:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Not Found'</span></span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span><span class="keyword">for</span> n <span class="keyword">in</span> <span class="number">8</span>, <span class="number">290</span>, <span class="number">308</span>, <span class="number">320</span>, <span class="number">8</span>, <span class="number">218</span>, <span class="number">320</span>, <span class="number">279</span>, <span class="number">289</span>, <span class="number">320</span>, <span class="number">9991</span>:</span><br><span class="line"><span class="prompt">... </span>    pep = get_pep(n)</span><br><span class="line"><span class="prompt">... </span>    print(n, len(pep))</span><br><span class="line"></span><br><span class="line"><span class="prompt">&gt;&gt;&gt; </span>get_pep.cache_info()</span><br><span class="line">CacheInfo(hits=<span class="number">3</span>, misses=<span class="number">8</span>, maxsize=<span class="number">32</span>, currsize=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
 <p><code>lru_cache</code>装饰器是Python3.2新增的，Python3.3新增了<code>typed</code>可选参数。</p>
 <h2 id="Python2的实现">Python2的实现</h2><p>Python2中没有<code>lru_cache</code>装饰器，但是我们可以自己实现，非常简单，如下：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">_CACHE_VALUES = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">memoized</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> _CACHE_VALUES.get(x, func(x))</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="decorator">@memoized</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addtwo</span><span class="params">(x)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> x+<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p>但我们上面这种写法太简单了，连缓存命中率这些统计都没有，而且也不通用。但明白了基本原理，我们要扩展也就不难了。更加复杂的装饰器实现可以参考<a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html">《深入浅出Python装饰器》</a>。<br>更偷懒一点，你可以把Python源码中的lru_cahce函数相关代码拷贝到项目中，<a href="https://github.com/python/cpython/blob/77a475ebaa65aa5a85287cbe782c552039c9f507/Lib/functools.py#L391" target="_blank" rel="external">参考这里</a>。</p>
+<p>但我们上面这种写法太简单了，连缓存命中率这些统计都没有，而且也不通用。但明白了基本原理，我们要扩展也就不难了。更加复杂的装饰器实现可以参考<a href="http://ajucs.com/2016/01/14/dive-into-python-decorator.html" target="_blank" rel="external">《深入浅出Python装饰器》</a>。<br>更偷懒一点，你可以把Python源码中的lru_cahce函数相关代码拷贝到项目中，<a href="https://github.com/python/cpython/blob/77a475ebaa65aa5a85287cbe782c552039c9f507/Lib/functools.py#L391" target="_blank" rel="external">参考这里</a>。</p>
 
         <div class="article-rights-info">
           <li>
@@ -205,14 +205,14 @@ ga('send', 'pageview');
           </li>
           <li><strong>发表时间：</strong>2016-01-22 14:43:16</li>
           <li><strong>最后更新：</strong>2016-04-20 14:00:22</li>
-          <li><strong>永久链接：</strong>http://ajucs.com/2016/01/22/python-memoization.html</li>
+          <li><strong>永久链接：</strong>http://aju.space/2016/01/22/python-memoization.html</li>
         </div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajucs.com/2016/01/22/python-memoization.html" data-id="cj7m4r24l000nr9hiz6qkzd4d" class="article-share-link">分享</a>
+      <a data-url="http://aju.space/2016/01/22/python-memoization.html" data-id="cj7m4w7xy000nvihikv6fj5zz" class="article-share-link">分享</a>
       
-        <a href="http://ajucs.com/2016/01/22/python-memoization.html#disqus_thread" class="article-comment-link">评论</a>
+        <a href="http://aju.space/2016/01/22/python-memoization.html#disqus_thread" class="article-comment-link">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
@@ -269,7 +269,7 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'aju';
   
-  var disqus_url = 'http://ajucs.com/2016/01/22/python-memoization.html';
+  var disqus_url = 'http://aju.space/2016/01/22/python-memoization.html';
   
   (function(){
     var dsq = document.createElement('script');
