@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aju.space/2017/07/31/Drive-into-python-asyncio-programming-part-1.html</loc>
+    <lastmod>2017-09-16T02:06:24.180Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://aju.space/2016/09/20/blocking-nonblocking-sync-async.html</loc>
     <lastmod>2016-09-24T10:14:17.998Z</lastmod>
   </url>
@@ -37,11 +42,6 @@
   </url>
   
   <url>
-    <loc>http://aju.space/2015/10/29/python-is-compiler-or-interpreter.html</loc>
-    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://aju.space/2015/12/03/implemention-of-encrypt-download-links.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
@@ -52,12 +52,12 @@
   </url>
   
   <url>
-    <loc>http://aju.space/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
+    <loc>http://aju.space/2015/11/11/git-merge-multiple-commits.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
   <url>
-    <loc>http://aju.space/2015/12/21/getting-started-with-python-books.html</loc>
+    <loc>http://aju.space/2014/11/26/the-difference-between-module-import-and-function-import.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
@@ -102,7 +102,12 @@
   </url>
   
   <url>
-    <loc>http://aju.space/2015/11/11/git-merge-multiple-commits.html</loc>
+    <loc>http://aju.space/2015/10/29/python-is-compiler-or-interpreter.html</loc>
+    <lastmod>2016-04-20T06:00:22.894Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://aju.space/2015/12/21/getting-started-with-python-books.html</loc>
     <lastmod>2016-04-20T06:00:22.894Z</lastmod>
   </url>
   
