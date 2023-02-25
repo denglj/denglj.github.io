@@ -111,7 +111,7 @@
 <li>解决问题的逻辑也要转变，不再是一条路走到黑，需要精心安排异步任务。</li>
 </ul>
 <h2 id="2_苦心异步为哪般">2 苦心异步为哪般</h2><p>如上文所述，异步编程面临诸多难点，Python 之父亲自上阵打磨4年才使 asyncio 模块在Python 3.6中“转正”，如此苦心为什么？答案只有一个：它值得！下面我们看看为何而值得。</p>
-<h3 id="2-1_CPU的时间观">2.1 CPU的时间观</h3><p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/01_cpu_time.png" alt="cpu_time"></p>
+<h3 id="2-1_CPU的时间观">2.1 CPU的时间观</h3><p><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/01_cpu_time.png" alt="cpu_time"></p>
 <p>我们将一个 2.6GHz 的 CPU 拟人化，假设它执行一条命令的时间，他它感觉上过了一秒钟。CPU是计算机的处理核心，也是最宝贵的资源，如果有浪费CPU的运行时间，导致其利用率不足，那程序效率必然低下（因为实际上有资源可以使效率更高）。</p>
 <p>如上图所示，在千兆网上传输2KB数据，CPU感觉过了14个小时，如果是在10M的公网上呢？那效率会低百倍！如果在这么长的一段时间内，CPU只是傻等结果而不能去干其他事情，是不是在浪费CPU的青春？</p>
 <p>鲁迅说，浪费“CPU”的时间等于谋财害命。而凶手就是程序猿。</p>
@@ -133,7 +133,7 @@
 <p>异步程序可以提高效率，而最大的瓶颈在I/O，业界诞生的解决方案没出意料：<strong>异步I/O吧，异步I/O吧，异步I/O吧吧！</strong></p>
 <h2 id="3_异步I/O进化之路">3 异步I/O进化之路</h2><p>如今，地球上最发达、规模最庞大的计算机程序，莫过于因特网。而从CPU的时间观中可知，<strong>网络I/O是最大的I/O瓶颈</strong>，除了宕机没有比它更慢的。所以，诸多异步框架都对准的是网络I/O。</p>
 <p>我们从一个爬虫例子说起，从因特网上下载10篇网页。</p>
-<h3 id="3-1_同步阻塞方式">3.1 同步阻塞方式</h3><p>最容易想到的解决方案就是依次下载，从建立socket连接到发送网络请求再到读取响应数据，顺序进行。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/02_blocking.png" alt="blocking"></p>
+<h3 id="3-1_同步阻塞方式">3.1 同步阻塞方式</h3><p>最容易想到的解决方案就是依次下载，从建立socket连接到发送网络请求再到读取响应数据，顺序进行。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/02_blocking.png" alt="blocking"></p>
 <p>注：总体耗时约为4.5秒。（因网络波动每次测试结果有所变动，本文取多次平均值）</p>
 <p>如上图所示，<code>blocking_way()</code> 的作用是建立 socket 连接，发送HTTP请求，然后从 socket 读取HTTP响应并返回数据。示例中我们请求了 example.com 的首页。在<code>sync_way()</code> 执行了10次，即下载 example.com 首页10次。</p>
 <p>在示例代码中有两个关键点。一是第10行的 <code>sock.connect((&#39;example.com&#39;, 80))</code>，该调用的作用是向<code>example.com</code>主机的<code>80</code>端口发起网络连接请求。 二是第14行、第18行的<code>sock.recv(4096)</code>，该调用的作用是从socket上读取4K字节数据。</p>
@@ -143,14 +143,14 @@
 </blockquote>
 <p>假设网络环境很差，创建网络连接需要1秒钟，那么<code>sock.connect()</code>就得阻塞1秒钟，等待网络连接成功。这1秒钟对一颗2.6GHz的CPU来讲，仿佛过去了83年，然而它不能干任何事情。<code>sock.recv()</code>也是一样的必须得等到服务端的响应数据已经被客户端接收。我们下载10篇网页，这个阻塞过程就得重复10次。如果一个爬虫系统每天要下载1000万篇网页呢？！</p>
 <p>上面说了很多，我们力图说明一件事：<strong>同步阻塞的网络交互方式，效率低十分低下。</strong>特别是在网络交互频繁的程序中。这种方式根本<strong>不可能</strong>挑战C10K/C10M。</p>
-<h3 id="3-2_改进方式：多进程">3.2 改进方式：多进程</h3><p>在一个程序内，依次执行10次太耗时，那开10个一样的程序同时执行不就行了。于是我们想到了多进程编程。<strong>为什么我们会先想到多进程呢</strong>？发展脉络如此。在更早的操作系统（Linux 2.4）及其以前，进程是 OS 调度任务的实体，是面向进程设计的OS。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/03_multiproc.png" alt="multiproc"></p>
+<h3 id="3-2_改进方式：多进程">3.2 改进方式：多进程</h3><p>在一个程序内，依次执行10次太耗时，那开10个一样的程序同时执行不就行了。于是我们想到了多进程编程。<strong>为什么我们会先想到多进程呢</strong>？发展脉络如此。在更早的操作系统（Linux 2.4）及其以前，进程是 OS 调度任务的实体，是面向进程设计的OS。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/03_multiproc.png" alt="multiproc"></p>
 <p>注：总体耗时约为 0.6 秒。</p>
 <p>改善效果立竿见影。但仍然有问题。总体耗时并没有缩减到原来的十分之一，而是九分之一左右，还有一些时间耗到哪里去了？<strong>进程切换开销</strong>。</p>
 <p>进程切换开销不止像“CPU的时间观”所列的“上下文切换”那么低。CPU从一个进程切换到另一个进程，需要把旧进程运行时的寄存器状态、内存状态全部保存好，再将另一个进程之前保存的数据恢复。对CPU来讲，几个小时就干等着。<strong>当进程数量大于CPU核心数量时，进程切换是必然需要的。</strong></p>
 <p>除了切换开销，多进程还有另外的缺点。一般的服务器在能够稳定运行的前提下，可以同时处理的进程数在数十个到数百个规模。如果进程数量规模更大，系统运行将不稳定，而且可用内存资源往往也会不足。</p>
 <p>多进程解决方案在面临每天需要成百上千万次下载任务的爬虫系统，或者需要同时搞定数万并发的电商系统来说，并不适合。</p>
 <p>除了<strong>切换开销大</strong>，以及<strong>可支持的任务规模小</strong>之外，多进程还有其他缺点，如状态共享等问题，后文会有提及，此处不再细究。</p>
-<h3 id="3-3_继续改进：多线程">3.3 继续改进：多线程</h3><p>由于线程的数据结构比进程更轻量级，同一个进程可以容纳多个线程，从进程到线程的优化由此展开。后来的OS也把调度单位由进程转为线程，进程只作为线程的容器，用于管理进程所需的资源。而且OS级别的线程是可以被分配到不同的CPU核心同时运行的。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/04_multithread.png" alt="multithread"></p>
+<h3 id="3-3_继续改进：多线程">3.3 继续改进：多线程</h3><p>由于线程的数据结构比进程更轻量级，同一个进程可以容纳多个线程，从进程到线程的优化由此展开。后来的OS也把调度单位由进程转为线程，进程只作为线程的容器，用于管理进程所需的资源。而且OS级别的线程是可以被分配到不同的CPU核心同时运行的。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/04_multithread.png" alt="multithread"></p>
 <p>注：总体运行时间约0.43秒。</p>
 <p>结果符合我们预期，比多进程耗时要少些。从运行时间上看，多线程似乎已经解决了切换开销大的问题。而且可支持的任务数量规模，也变成了数百个到数千个。</p>
 <p>但是，多线程仍有问题，特别是Python里的多线程。首先，Python中的多线程因为GIL的存在，它们并不能利用CPU多核优势，<strong>一个Python进程中，只允许有一个线程处于运行状态</strong>。那为什么结果还是如预期，耗时缩减到了十分之一？</p>
@@ -161,7 +161,7 @@
 <p>除了GIL之外，所有的多线程还有通病。它们是被OS调度，调度策略是抢占式的，以保证同等优先级的线程都有均等的执行机会，那带来的问题是：并不知道下一时刻是哪个线程被运行，也不知道它正要执行的代码是什么。所以就可能存在<strong>竞态条件</strong>。</p>
 <p>例如爬虫工作线程从任务队列拿待抓取URL的时候，如果多个爬虫线程同时来取，那这个任务到底该给谁？那就需要用到“锁”或“同步队列”来保证下载任务不会被重复执行。</p>
 <p>而且线程支持的多任务规模，在数百到数千的数量规模。在大规模的高频网络交互系统中，仍然有些吃力。当然，<strong>多线程最主要的问题还是竞态条件</strong>。</p>
-<h3 id="3-4_非阻塞方式">3.4 非阻塞方式</h3><p>终于，我们来到了非阻塞解决方案。先来看看最原始的非阻塞如何工作的。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/05_nonblocking.png" alt="nonblocking"></p>
+<h3 id="3-4_非阻塞方式">3.4 非阻塞方式</h3><p>终于，我们来到了非阻塞解决方案。先来看看最原始的非阻塞如何工作的。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/05_nonblocking.png" alt="nonblocking"></p>
 <p>注：总体耗时约4.3秒。</p>
 <p>首先注意到两点，就感觉被骗了。一是耗时与同步阻塞相当，二是代码更复杂。要非阻塞何用？且慢。</p>
 <p>上图第9行代码<code>sock.setblocking(False)</code>告诉OS，让socket上阻塞调用都改为非阻塞的方式。之前我们说到，非阻塞就是在做一件事的时候，不阻碍调用它的程序做别的事情。上述代码在执行完 <code>sock.connect()</code> 和 <code>sock.recv()</code> 后的确不再阻塞，可以继续往下执行请求准备的代码或者是执行下一次读取。</p>
@@ -175,17 +175,17 @@
 <p>鉴于 Linux 服务器的普遍性，以及为了追求更高效率，所以我们常常听闻被探讨的模块都是 <code>epoll</code> 。</p>
 <h4 id="3-5-2_回调(Callback)">3.5.2 回调(Callback)</h4><p>把I/O事件的等待和监听任务交给了 OS，那 OS 在知道I/O状态发生改变后（例如socket连接已建立成功可发送数据），它又怎么知道接下来该干嘛呢？<strong>只能回调</strong>。</p>
 <p>需要我们将发送数据与读取数据封装成独立的函数，让<code>epoll</code>代替应用程序监听<code>socket</code>状态时，得告诉<code>epoll</code>：“如果<code>socket</code>状态变为可以往里写数据（连接建立成功了），请调用HTTP请求发送函数。如果<code>socket</code> 变为可以读数据了（客户端已收到响应），请调用响应处理函数。”</p>
-<p>于是我们利用<code>epoll</code>结合回调机制重构爬虫代码：<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/06_callback.png" alt="callback"></p>
+<p>于是我们利用<code>epoll</code>结合回调机制重构爬虫代码：<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/06_callback.png" alt="callback"></p>
 <p>此处和前面稍有不同的是，我们将下载不同的10个页面，相对URL路径存放于<code>urls_todo</code>集合中。现在看看改进在哪。</p>
 <p>首先，不断尝试<code>send()</code> 和 <code>recv()</code> 的两个循环被消灭掉了。</p>
 <p>其次，导入了<code>selectors</code>模块，并创建了一个<code>DefaultSelector</code> 实例。Python标准库提供的<code>selectors</code>模块是对底层<code>select/poll/epoll/kqueue</code>的封装。<code>DefaultSelector</code>类会根据 OS 环境自动选择最佳的模块，那在 Linux 2.5.44 及更新的版本上都是<code>epoll</code>了。</p>
 <p>然后，在第25行和第31行分别注册了<code>socket</code>可写事件(<code>EVENT_WRITE</code>)和可读事件(<code>EVENT_READ</code>)发生后应该采取的回调函数。</p>
 <p>虽然代码结构清晰了，阻塞操作也交给OS去等待和通知了，但是，我们要抓取10个不同页面，就得创建10个<code>Crawler</code>实例，就有20个事件将要发生，那如何从<code>selector</code>里获取当前正发生的事件，并且得到对应的回调函数去执行呢？</p>
-<h4 id="3-5-3_事件循环（Event_Loop）">3.5.3 事件循环（Event Loop）</h4><p>为了解决上述问题，那我们只得采用老办法，写一个循环，去访问<code>selector</code>模块，等待它告诉我们当前是哪个事件发生了，应该对应哪个回调。<strong>这个等待事件通知的循环，称之为事件循环</strong>。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/07_ioloop.png" alt="ioloop"></p>
+<h4 id="3-5-3_事件循环（Event_Loop）">3.5.3 事件循环（Event Loop）</h4><p>为了解决上述问题，那我们只得采用老办法，写一个循环，去访问<code>selector</code>模块，等待它告诉我们当前是哪个事件发生了，应该对应哪个回调。<strong>这个等待事件通知的循环，称之为事件循环</strong>。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/07_ioloop.png" alt="ioloop"></p>
 <p>上述代码中，我们用<code>stopped</code>全局变量控制事件循环何时停止。当<code>urls_todo</code>消耗完毕后，会标记<code>stopped</code>为<code>True</code>。</p>
 <p>重要的是第49行代码，<strong><code>selector.select()</code> 是一个阻塞调用</strong>，因为如果事件不发生，那应用程序就没事件可处理，所以就干脆阻塞在这里等待事件发生。那可以推断，如果只下载一篇网页，一定要<code>connect()</code>之后才能<code>send()</code>继而<code>recv()</code>，那它的效率和阻塞的方式是一样的。因为不在<code>connect()/recv()</code>上阻塞，也得在<code>select()</code>上阻塞。</p>
 <p>所以，<strong><code>selector</code>机制(后文以此称呼代指<code>epoll/kqueue</code>)是设计用来解决大量并发连接的</strong>。当系统中有大量非阻塞调用，能随时产生事件的时候，<code>selector</code>机制才能发挥最大的威力。</p>
-<p>下面是如何启创建10个下载任务和启动事件循环的：<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/08_useloop.png" alt="useloop"></p>
+<p>下面是如何启创建10个下载任务和启动事件循环的：<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/08_useloop.png" alt="useloop"></p>
 <p>注：总体耗时约0.45秒。</p>
 <p>上述执行结果令人振奋。在单线程内用 <strong>事件循环+回调</strong> 搞定了10篇网页同时下载的问题。这，已经是<strong>异步编程</strong>了。虽然有一个<code>for</code> 循环顺序地创建<code>Crawler</code> 实例并调用 <code>fetch</code> 方法，但是<code>fetch</code> 内仅有<code>connect()</code>和注册可写事件，而且从执行时间明显可以推断，多个下载任务确实在同时进行！</p>
 <p>上述代码异步执行的过程：</p>
@@ -246,17 +246,17 @@
 <h3 id="4-4_基于生成器的协程">4.4 基于生成器的协程</h3><p>早期的 Pythoner 发现 Python 中有种特殊的对象——生成器（Generator），它的特点和协程很像。每一次迭代之间，会暂停执行，继续下一次迭代的时候还不会丢失先前的状态。</p>
 <p>为了支持用生成器做简单的协程，Python 2.5 对生成器进行了增强(PEP 342)，该增强提案的标题是 “Coroutines via Enhanced Generators”。有了PEP 342的加持，生成器可以通过<code>yield</code> 暂停执行和向外返回数据，也可以通过<code>send()</code>向生成器内发送数据，还可以通过<code>throw()</code>向生成器内抛出异常以便随时终止生成器的运行。</p>
 <p>接下来，我们用基于生成器的协程来重构先前的爬虫代码。</p>
-<h4 id="4-4-1_未来对象(Future)">4.4.1 未来对象(Future)</h4><p>不用回调的方式了，怎么知道异步调用的结果呢？先设计一个对象，异步调用执行完的时候，就把结果放在它里面。这种对象称之为未来对象。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/09_future.png" alt="future"></p>
+<h4 id="4-4-1_未来对象(Future)">4.4.1 未来对象(Future)</h4><p>不用回调的方式了，怎么知道异步调用的结果呢？先设计一个对象，异步调用执行完的时候，就把结果放在它里面。这种对象称之为未来对象。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/09_future.png" alt="future"></p>
 <p>未来对象有一个<code>result</code>属性，用于存放未来的执行结果。还有个<code>set_result()</code>方法，是用于设置<code>result</code>的，并且会在给<code>result</code>绑定值以后运行事先给<code>future</code>添加的回调。回调是通过未来对象的<code>add_done_callback()</code>方法添加的。</p>
 <p>不要疑惑此处的<code>callback</code>，说好了不回调的嘛？难道忘了我们曾经说的<strong>要异步，必回调</strong>。不过也别急，此处的回调，和先前学到的回调，还真有点不一样。</p>
-<h4 id="4-4-2_重构_Crawler">4.4.2 重构 Crawler</h4><p>现在不论如何，我们有了未来对象可以代表未来的值。先用<code>Future</code>来重构爬虫代码。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/10_gen_crawler.png" alt="gen_crawler"></p>
+<h4 id="4-4-2_重构_Crawler">4.4.2 重构 Crawler</h4><p>现在不论如何，我们有了未来对象可以代表未来的值。先用<code>Future</code>来重构爬虫代码。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/10_gen_crawler.png" alt="gen_crawler"></p>
 <p>和先前的回调版本对比，已经有了较大差异。<code>fetch</code> 方法内有了<code>yield</code>表达式，使它成为了生成器。我们知道生成器需要先调用<code>next()</code>迭代一次或者是先<code>send(None)</code>启动，遇到<code>yield</code>之后便暂停。那这<code>fetch</code>生成器如何再次恢复执行呢？至少 <code>Future</code> 和 <code>Crawler</code>都没看到相关代码。</p>
-<h4 id="4-4-3_任务对象(Task)">4.4.3 任务对象(Task)</h4><p>为了解决上述问题，我们只需遵循一个编程规则：单一职责，每种角色各司其职，如果还有工作没有角色来做，那就创建一个角色去做。没人来恢复这个生成器的执行么？没人来管理生成器的状态么？创建一个，就叫<code>Task</code>好了，很合适的名字。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/11_task.png" alt="task"></p>
+<h4 id="4-4-3_任务对象(Task)">4.4.3 任务对象(Task)</h4><p>为了解决上述问题，我们只需遵循一个编程规则：单一职责，每种角色各司其职，如果还有工作没有角色来做，那就创建一个角色去做。没人来恢复这个生成器的执行么？没人来管理生成器的状态么？创建一个，就叫<code>Task</code>好了，很合适的名字。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/11_task.png" alt="task"></p>
 <p>上述代码中Task封装了<code>coro</code>对象，即初始化时传递给他的对象，被管理的任务是待执行的协程，故而这里的<code>coro</code>就是<code>fetch()</code>生成器。它还有个<code>step()</code>方法，在初始化的时候就会执行一遍。<code>step()</code>内会调用生成器的<code>send()</code>方法，初始化第一次发送的是<code>None</code>就驱动了<code>coro</code>即<code>fetch()</code>的第一次执行。</p>
 <p><code>send()</code>完成之后，得到下一次的<code>future</code>，然后给下一次的<code>future</code>添加<code>step()</code>回调。原来<code>add_done_callback()</code>不是给写爬虫业务逻辑用的。此前的<code>callback</code>可就干的是业务逻辑呀。</p>
 <p>再看<code>fetch()</code>生成器，其内部写完了所有的业务逻辑，包括如何发送请求，如何读取响应。而且注册给<code>selector</code>的回调相当简单，就是给对应的<code>future</code>对象绑定结果值。两个<code>yield</code>表达式都是返回对应的<code>future</code>对象，然后返回<code>Task.step()</code>之内，这样<code>Task</code>, <code>Future</code>, <code>Coroutine</code>三者精妙地串联在了一起。</p>
 <p>初始化<code>Task</code>对象以后，把<code>fetch()</code>给驱动到了第44行<code>yied f</code>就完事了，接下来怎么继续？</p>
-<h4 id="4-4-4_事件循环(Event_Loop)驱动协程运行">4.4.4 事件循环(Event Loop)驱动协程运行</h4><p>该事件循环上场了。接下来，只需等待已经注册的<code>EVENT_WRITE</code>事件发生。事件循环就像心脏一般，只要它开始跳动，整个程序就会持续运行。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/12_evloop.png" alt="evloop"></p>
+<h4 id="4-4-4_事件循环(Event_Loop)驱动协程运行">4.4.4 事件循环(Event Loop)驱动协程运行</h4><p>该事件循环上场了。接下来，只需等待已经注册的<code>EVENT_WRITE</code>事件发生。事件循环就像心脏一般，只要它开始跳动，整个程序就会持续运行。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/12_evloop.png" alt="evloop"></p>
 <p>注：总体耗时约0.43秒。</p>
 <p>现在<code>loop</code>有了些许变化，<code>callback()</code>不再传递<code>event_key</code>和<code>event_mask</code>参数。也就是说，这里的回调根本不关心是谁触发了这个事件，结合<code>fetch()</code>可以知道，它只需完成对<code>future</code>设置结果值即可<code>f.set_result()</code>。而且<code>future</code>是谁它也不关心，因为<strong>协程</strong>能够保存自己的状态，知道自己的<code>future</code>是哪个。也不用关心到底要设置什么值，因为要设置什么值也是协程内安排的。</p>
 <p><strong>此时的<code>loop()</code>，真的成了一个心脏，它只管往外泵血，不论这份血液是要输送给大脑还是要给脚趾，只要它还在跳动，生命就能延续。</strong></p>
@@ -288,10 +288,10 @@
 <p>第二个功能就是在子生成器和原生成器的调用者之间打开双向通道，两者可以直接通信。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> subgen()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">subgen</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        x = <span class="keyword">yield</span></span><br><span class="line">        <span class="keyword">yield</span> x+<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    g = gen()</span><br><span class="line">    next(g)                <span class="comment"># 驱动生成器g开始执行到第一个 yield</span></span><br><span class="line">    retval = g.send(<span class="number">1</span>)     <span class="comment"># 看似向生成器 gen() 发送数据</span></span><br><span class="line">    print(retval)          <span class="comment"># 返回2</span></span><br><span class="line">    g.throw(StopIteration) <span class="comment"># 看似向gen()抛入异常</span></span><br></pre></td></tr></table></figure></p>
 <p>通过上述代码清晰地理解了<code>yield from</code>的双向通道功能。关键字<code>yield from</code>在<code>gen()</code>内部为<code>subgen()</code>和<code>main()</code>开辟了通信通道。<code>main()</code>里可以直接将数据<code>1</code>发送给<code>subgen()</code>,<code>subgen()</code>也可以将计算后的数据<code>2</code>返回到<code>main()</code>里，<code>main()</code>里也可以直接向<code>subgen()</code>抛入异常以终止<code>subgen()</code>。</p>
 <p>顺带一提，<code>yield from</code> 除了可以 <code>yield from &lt;generator&gt;</code> 还可以 <code>yield from &lt;iterable&gt;</code>。</p>
-<h4 id="4-5-2_重构代码">4.5.2 重构代码</h4><p>抽象socket连接的功能:<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/13_yf_conn.png" alt="yf_conn"></p>
-<p>抽象单次<code>recv()</code>和读取完整的response功能:<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/14_yf_read.png" alt="yf_read"></p>
-<p>三个关键点的抽象已经完成，现在重构<code>Crawler</code>类：<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/15_yf_crawler.png" alt="yf_crawler"></p>
-<p>上面代码整体来讲没什么问题，可复用的代码已经抽象出去，作为子生成器也可以使用 <code>yield from</code> 语法来获取值。但另外有个点需要<strong>注意</strong>：在第24和第35行返回future对象的时候，我们了<code>yield from f</code> 而不是原来的<code>yield f</code>。<code>yield</code>可以直接作用于普通Python对象，而<code>yield from</code>却不行，所以我们对<code>Future</code>还要进一步改造，把它变成一个<code>iterable</code>对象就可以了。<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/16_yf_future.png" alt="yf_future"></p>
+<h4 id="4-5-2_重构代码">4.5.2 重构代码</h4><p>抽象socket连接的功能:<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/13_yf_conn.png" alt="yf_conn"></p>
+<p>抽象单次<code>recv()</code>和读取完整的response功能:<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/14_yf_read.png" alt="yf_read"></p>
+<p>三个关键点的抽象已经完成，现在重构<code>Crawler</code>类：<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/15_yf_crawler.png" alt="yf_crawler"></p>
+<p>上面代码整体来讲没什么问题，可复用的代码已经抽象出去，作为子生成器也可以使用 <code>yield from</code> 语法来获取值。但另外有个点需要<strong>注意</strong>：在第24和第35行返回future对象的时候，我们了<code>yield from f</code> 而不是原来的<code>yield f</code>。<code>yield</code>可以直接作用于普通Python对象，而<code>yield from</code>却不行，所以我们对<code>Future</code>还要进一步改造，把它变成一个<code>iterable</code>对象就可以了。<br><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/16_yf_future.png" alt="yf_future"></p>
 <p>只是增加了<code>__iter__()</code>方法的实现。如果不把<code>Future</code>改成<code>iterable</code>也是可以的，还是用原来的<code>yield f</code>即可。那为什么需要改进呢？</p>
 <p>首先，我们是在基于生成器做协程，而生成器还得是生成器，如果继续混用<code>yield</code>和<code>yield from</code> 做协程，代码可读性和可理解性都不好。其次，如果不改，协程内还得关心它等待的对象是否可被<code>yield</code>，如果协程里还想继续返回协程怎么办？如果想调用普通函数动态生成一个<code>Future</code>对象再返回怎么办？</p>
 <p>所以，在Python 3.3 引入<code>yield from</code>新语法之后，就不再推荐用<code>yield</code>去做协程。全都使用<code>yield from</code>由于其双向通道的功能，可以让我们在协程间随心所欲地传递数据。</p>
@@ -305,7 +305,7 @@
 <h3 id="4-6_总结">4.6  总结</h3><p>行至此处，我们已经掌握了<code>asyncio</code>的核心原理，学习了它的原型，也学习了异步I/O在 CPython 官方支持的生态下是如何一步步发展至今的。</p>
 <p>实际上，真正的<code>asyncio</code>比我们前几节中学到的要复杂得多，它还实现了零拷贝、公平调度、异常处理、任务状态管理等等使 Python 异步编程更完善的内容。理解原理和原型对我们后续学习有莫大的帮助。</p>
 <h2 id="5_asyncio和原生协程初体验">5 asyncio和原生协程初体验</h2><p>本节中，我们将初步体验<code>asyncio</code>库和新增语法<code>async/await</code>给我们带来的便利。由于Python2-3的过度期间，Python3.0-3.4的使用者并不是太多，也为了不让更多的人困惑，也因为<code>aysncio</code>在3.6才转正，所以更深入学习<code>asyncio</code>库的时候我们将使用<code>async/await</code>定义的原生协程风格，<code>yield from</code>风格的协程不再阐述（实际上它们可用很小的代价相互代替）。</p>
-<p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/asyncio/part1/17_aio.png" alt="aio"></p>
+<p><img src="http://imgj.metasotalaw.cn/static/images/asyncio/part1/17_aio.png" alt="aio"></p>
 <p>对比生成器版的协程，使用asyncio库后变化很大：</p>
 <ul>
 <li>没有了<code>yield</code> 或 <code>yield from</code>，而是<code>async/await</code></li>
@@ -331,7 +331,7 @@
 <h4 id="相关代码">相关代码</h4><ul>
 <li><a href="http://github.com/denglj/aiotutorial" target="_blank" rel="external">http://github.com/denglj/aiotutorial</a></li>
 </ul>
-<h4 id="请关注微信公众号驹说码事">请关注微信公众号驹说码事</h4><p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/jushuoms.jpg" alt="驹说码事"></p>
+<h4 id="请关注微信公众号驹说码事">请关注微信公众号驹说码事</h4><p><img src="http://imgj.metasotalaw.cn/jushuoms.jpg" alt="驹说码事"></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>Python asyncio异步编程中文教程，只此一篇足矣，一览众山小！</p>
@@ -433,7 +433,7 @@
 <li><p><strong>混合云</strong> 这种是私有云、社区云、公有云的混合组成形式，各部分是独立的实体，但被标准化或专利技术绑定在一起，实现数据和应用程序的可移植性（例如在突发情况下在不同的云之间做负载均衡）。</p>
 </li>
 </ul>
-<p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/cloudstack.png" alt="cloudstack"></p>
+<p><img src="http://imgj.metasotalaw.cn/static/images/cloudstack.png" alt="cloudstack"></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>美国国家标准技术研究所（NIST）对云计算给的基本定义如下。</p>
@@ -493,9 +493,9 @@
 <p>如何精确地测定<strong><code>一天</code></strong>的长度就成了最主要问题，进而要确定四季变化，再到制定历法。因为最直观的就是太阳、月亮以及一些恒星在天空中周期性地变化，<code>日、月、年</code>长度的基本参照物就有了。所以制定历法，在全世界都是最早推动天文学发展的主要因素。</p>
 <p>以此，用太阳照射物体的影子来测量时间自然被人类想到了，所以发明了<strong>日晷</strong>、<strong>圭表</strong>等，不仅能测天，还能测季节。后来为了满足阴天、夜晚、室内的计时需求，水钟、沙漏等被发明出来。</p>
 <h2 id="GMT">GMT</h2><p><strong>GMT</strong>（Greenwich Mean Time）译作<strong>格林威治标准时间</strong>或<strong>格林威治平均时间</strong>。是由英国伦敦皇家格林威治天文台发布的标准时间。民用GMT自1847年起就在大不列颠岛使用。1884年，在华盛顿召开了国际子午线会议，格林威治当地平太阳时被指定为通用日，以午夜零时作为当天的起点。从1924年2月5日开始每隔一小时向全世界报时。被世界广泛采用。</p>
-<p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/jingxian.jpg" alt="jingxian"></p>
+<p><img src="http://imgj.metasotalaw.cn/static/images/jingxian.jpg" alt="jingxian"></p>
 <p>GMT时间是如何测量的呢？是观察<strong>真太阳前后两次经过格林威治当地正上空为周期</strong>，即一天。这也是为什么经过格林威治的经线，规定为<strong>0度经线</strong>、<strong>本初子午线</strong>的原因。但因为地球绕太阳公转轨道不是正圆且公转速度不匀速等影响，如此测出来的每天的长短不一，格林威治天文台<strong>连续观测365个长短不一的天，然后求平均值得到一天的长度，称为平太阳日，每一天以格林威治子夜算起。然后再把天划分为时分秒。这种方法和天文学上假想一个太阳（假太阳，亦称平太阳）在天球赤道上匀速运行的观测结果是一致的。</strong></p>
-<p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/chidao.png" alt="chidao"></p>
+<p><img src="http://imgj.metasotalaw.cn/static/images/chidao.png" alt="chidao"></p>
 <p>这种方法测出来的基本单位是天。至于为什么一天要划分为24小时，每小时划分为60分钟，每分钟为60秒，后文再谈。<strong>平太阳日规定了每天正好86400秒</strong>。只测真太阳的话，每天长度不固定，这会给很多需要精确计时的领域带来困扰，是引入平太阳时的原因。</p>
 <h2 id="时区">时区</h2><p>国际统一的计时标准有了，但为了解决“18:00点整A地区太阳快落山”而“18:00点整B地区太阳还没出来”的反人类直觉的尴尬现象，<strong>为了让大家都能统一地有“凌晨5点太阳就要出来了”的认知，引入了时区的概念。</strong></p>
 <p>理论时区以被15整除的子午线（经线）为中心，向东西两侧延伸7.5度，即每15°划分一个时区，<strong>全球被划分为24个时区</strong>，这是理论时区。但因为国界线并不规则的原因，所以实际划分的时区并不规则。<strong>格林威治所在时区为0时区</strong>。</p>
@@ -516,7 +516,7 @@
 <p>有趣的是直到1967年国际天文学联合会才采用“协调世界时”这个命名，因为英语国家想坚持命名为CUT（Coordinated Universal Time）而法语国家想命名为TUC（Temps Universel Coordonné）。几番争执后相互妥协成了UTC。真是有趣，不仅时间是不同计时系统相互协调的结果，连命名也是协调的结果。</p>
 <h2 id="GPST">GPST</h2><p><strong>全球定位系统时（GPS Time）</strong>，GPS由24颗卫星组成，可以向全球范围内提供定位、测速、高精度授时等功能。GPST是由星载原子钟和地面监控中心组成的一种原子时系统。起点是1980年1月6日0时，此时刻与UTC对齐。</p>
 <p>虽然以TAI时为基础的UTC时与GPST时都是使用原子钟，但是还是有微小差异的。差异一来自组成各自计时系统原子钟的数量，TAI为全球范围的240多个，而GPST为20多个。差异二是GPST所用的原子钟在高速飞行的卫星上时间长度会发生变化，所以还需要使用《相对论》进行卫星时间修正。差异三在UTC为了和UT1保持较小的误差，还得跳秒。</p>
-<p>下面是几种时间的直观对比（<a href="http://www.leapsecond.com/java/gpsclock.htm" target="_blank" rel="external">参考资料</a>）：<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/time.png" alt="time"></p>
+<p>下面是几种时间的直观对比（<a href="http://www.leapsecond.com/java/gpsclock.htm" target="_blank" rel="external">参考资料</a>）：<br><img src="http://imgj.metasotalaw.cn/static/images/time.png" alt="time"></p>
 <p>通过上图发现几种时间的差异之处。UTC与GMT看起来已经相差两秒，可能是网络原因导致的，实际上它们应该相差在1秒之内。大多数时候打开看应该是GMT慢了1秒。</p>
 <p>国内的北斗导航系统也能提供授时服务，同样是卫星上载有原子钟。早期的北斗卫星采用瑞士进口原子钟，目前已经开始使用国产原子钟。截止2016年6月12日，已经发射23颗北斗卫星，其中21颗在进行服务。</p>
 <h2 id="24小时、60分钟的由来">24小时、60分钟的由来</h2><p>为什么一年分为4季而非5季？分为12个月而非13个月？为什么平年是365天？为什么每隔4年是一个闰年？为什么闰年是366天？为什么每天分为24小时而非20小时？为什么每小时分为60分钟而不是100分钟？为什么每分钟分为60秒而不是70秒？</p>
@@ -1031,7 +1031,7 @@
 <li><p>文件服务器收到该响应后，输出真实文件给用户</p>
 </li>
 </ol>
-<h2 id="交互时序图">交互时序图</h2><p><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/encryption-download-url.png" alt="加密下载链接交互时序图"></p>
+<h2 id="交互时序图">交互时序图</h2><p><img src="http://imgj.metasotalaw.cn/static/images/encryption-download-url.png" alt="加密下载链接交互时序图"></p>
 <h2 id="扩展思考">扩展思考</h2><ul>
 <li>如何生成一次性加密下载链接</li>
 <li>如何更有效地隐藏文件服务器的真实地址</li>
@@ -1486,12 +1486,12 @@
 <h2 id="插件型实现方案">插件型实现方案</h2><h3 id="1-_远程接口型">1. 远程接口型</h3><ul>
 <li><strong>举例</strong><br>天气/手机号归属/电影票/交通等查询, 在线点歌, 基于小黄鸡等机器人实现的智能问答/聊天机器人等</li>
 <li><strong>使用场景</strong><br>用户需要的功能与数据已由其他平台实现与产生，并留有交互接口(没直接接口抓取网页解析也可)。</li>
-<li><strong>通信流程</strong><br>查成都天气预报为例<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/wechat-addons-01.png" alt="远程接口型通信流程"></li>
+<li><strong>通信流程</strong><br>查成都天气预报为例<br><img src="http://imgj.metasotalaw.cn/static/images/wechat-addons-01.png" alt="远程接口型通信流程"></li>
 </ul>
 <h3 id="2-_本地代码型">2. 本地代码型</h3><ul>
 <li><strong>举例</strong><br>一战到底，刮刮乐，大转盘，微调研，微官网。微擎的大型附加应用如“人人商城分销版”也是这种形式，有赞商城本质也是这种。</li>
 <li><strong>使用场景</strong><br>用户需要与应用互动，互动产生的数据需要存储在本地；或简单的纯信息展示型应用。</li>
-<li><strong>通信流程</strong><br>玩大转盘游戏为例<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/wechat-addons-02.png" alt="远程接口型通信流程"></li>
+<li><strong>通信流程</strong><br>玩大转盘游戏为例<br><img src="http://imgj.metasotalaw.cn/static/images/wechat-addons-02.png" alt="远程接口型通信流程"></li>
 </ul>
 <h2 id="独立系统型实现方案">独立系统型实现方案</h2><h3 id="1-_无需授权型">1. 无需授权型</h3><ul>
 <li><strong>举例</strong><br>侯斯特WordPress伴侣，成都交警，四川汽车票务网</li>
@@ -1504,14 +1504,14 @@
 <li><strong>通信流程</strong><ul>
 <li>微信只做浏览器的情况（略）</li>
 <li>不在乎粉丝身份的情况（略）</li>
-<li>粉丝与系统交互但不产生内容的情况<br>侯斯特WP伴侣为例<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/wechat-addons-03.png" alt="无需授权型通信流程"></li>
+<li>粉丝与系统交互但不产生内容的情况<br>侯斯特WP伴侣为例<br><img src="http://imgj.metasotalaw.cn/static/images/wechat-addons-03.png" alt="无需授权型通信流程"></li>
 </ul>
 </li>
 </ul>
 <h3 id="2-_模拟授权型">2. 模拟授权型</h3><ul>
 <li><strong>举例</strong><br>招商银行信息查询，工行信息查询</li>
 <li><strong>使用场景</strong><br>系统根据微信粉丝身份信息产生结果并返回。例如要通过微信公众号查询“我的余额”，要确定这个微信粉丝的实名信息与欲查询的银行卡信息。在使用功能前，公众号都会要求粉丝提供识别身份的信息，进行绑定。</li>
-<li><strong>通信流程</strong><br>查询银行卡余额为例<br><img src="http://7xn3rj.com1.z0.glb.clouddn.com/static/images/wechat-addons-03.png" alt="模拟授权型通信流程"></li>
+<li><strong>通信流程</strong><br>查询银行卡余额为例<br><img src="http://imgj.metasotalaw.cn/static/images/wechat-addons-03.png" alt="模拟授权型通信流程"></li>
 </ul>
 <h3 id="3-_代发起授权型">3. 代发起授权型</h3><ul>
 <li><strong>举例</strong><br>京东商城，QQ充值</li>
